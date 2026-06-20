@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- 背景の角丸正方形（テーマカラーの青） -->
+  <rect x="0" y="0" width="64" height="64" rx="14" fill="#2563eb"/>
+
+  <!-- 会話バブル本体: x=12〜52(幅40), y=14〜40(高さ26)の角丸長方形 -->
+  <rect x="12" y="14" width="40" height="26" rx="8" fill="#ffffff"/>
+  <!-- バブルの尾（しっぽ）: 左下から斜め下に伸びる三角形 -->
+  <path d="M20 40 L20 50 L30 40 Z" fill="#ffffff"/>
+
+  <!-- バブル内のドット（会話中を表現）。バブル中央 y = 14 + 26/2 = 27 -->
+  <circle cx="24" cy="27" r="3" fill="#2563eb"/>
+  <circle cx="32" cy="27" r="3" fill="#2563eb"/>
+  <circle cx="40" cy="27" r="3" fill="#2563eb"/>
+</svg>
