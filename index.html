@@ -5,10 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
   ===========================================================================
-  このファイルはCSS・JavaScriptもすべて含む単一HTMLファイルです。
-  （別途 style.css / app.js は不要です。このファイル1つだけで動作します）
-
-  Firebase設定値は本ファイル内の <script type="module"> 内、firebaseConfig
+  Firebase設定値は本ファイル下部の <script type="module"> 内、firebaseConfig
   に設定済みです（riku-chat-c3b3d プロジェクト）。別のプロジェクトに切り替える
   場合のみ、その値を書き換えてください。
   ===========================================================================
@@ -27,15 +24,14 @@
   - 表示名はブラウザの localStorage にのみ保存され、Firestore には
     送信時にメッセージへ添えて保存されます。
 -->
-
-<title>RIKU CHAT</title>
-
+<title>Web Chat</title>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPCEtLSDog4zmma/jga7op5LkuLjmraPmlrnlvaLvvIjjg4bjg7zjg57jgqvjg6njg7zjga7pnZLvvIkgLS0+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMyNTYzZWIiLz4KCiAgPCEtLSDkvJroqbHjg5Djg5bjg6vmnKzkvZM6IHg9MTLjgJw1MijluYU0MCksIHk9MTTjgJw0MCjpq5jjgZUyNinjga7op5LkuLjplbfmlrnlvaIgLS0+CiAgPHJlY3QgeD0iMTIiIHk9IjE0IiB3aWR0aD0iNDAiIGhlaWdodD0iMjYiIHJ4PSI4IiBmaWxsPSIjZmZmZmZmIi8+CiAgPCEtLSDjg5Djg5bjg6vjga7lsL7vvIjjgZfjgaPjgb3vvIk6IOW3puS4i+OBi+OCieaWnOOCgeS4i+OBq+S8uOOBs+OCi+S4ieinkuW9oiAtLT4KICA8cGF0aCBkPSJNMjAgNDAgTDIwIDUwIEwzMCA0MCBaIiBmaWxsPSIjZmZmZmZmIi8+CgogIDwhLS0g44OQ44OW44Or5YaF44Gu44OJ44OD44OI77yI5Lya6Kmx5Lit44KS6KGo54++77yJ44CC44OQ44OW44Or5Lit5aSuIHkgPSAxNCArIDI2LzIgPSAyNyAtLT4KICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjI3IiByPSIzIiBmaWxsPSIjMjU2M2ViIi8+CiAgPGNpcmNsZSBjeD0iMzIiIGN5PSIyNyIgcj0iMyIgZmlsbD0iIzI1NjNlYiIvPgogIDxjaXJjbGUgY3g9IjQwIiBjeT0iMjciIHI9IjMiIGZpbGw9IiMyNTYzZWIiLz4KPC9zdmc+Cg==" type="image/svg+xml">
 <style>
 /* ===========================================================================
-   スタイル定義（見た目・色・レイアウト）
+   Web Chat - style.css
+   見た目（色・レイアウト）はすべてここで定義しています。
    配色は :root と [data-theme="..."] の中の CSS変数で管理しているため、
-   テーマを増やす場合もこの部分の変更だけで対応できます。
+   テーマを増やす場合もこのファイルの変更だけで対応できます。
    =========================================================================== */
 
 :root{
@@ -105,6 +101,40 @@
     --danger-weak: #fbe3e3;
   }
 
+  /* ピンク系テーマ: やわらかい桃色を基調にした配色 */
+  [data-theme="pink"]{
+    --bg: #fdf0f5;
+    --panel: #ffffff;
+    --border: #f6d9e6;
+    --text: #3a1626;
+    --text-sub: #9b6b82;
+    --bubble-me: #e0508f;
+    --bubble-me-text: #ffffff;
+    --bubble-other: #fbe3ee;
+    --bubble-other-text: #3a1626;
+    --accent: #e0508f;
+    --accent-weak: #fbe0ec;
+    --danger: #d6383b;
+    --danger-weak: #fbe3e3;
+  }
+
+  /* オレンジ系テーマ: 暖かみのある橙色を基調にした配色 */
+  [data-theme="orange"]{
+    --bg: #fdf3ec;
+    --panel: #ffffff;
+    --border: #f5ddc7;
+    --text: #3a2412;
+    --text-sub: #9b7355;
+    --bubble-me: #e2762e;
+    --bubble-me-text: #ffffff;
+    --bubble-other: #fbe7d4;
+    --bubble-other-text: #3a2412;
+    --accent: #e2762e;
+    --accent-weak: #fbe4cd;
+    --danger: #d6383b;
+    --danger-weak: #fbe3e3;
+  }
+
   *{ box-sizing: border-box; }
   html, body{
     margin:0; padding:0; height:100%;
@@ -116,6 +146,8 @@
   html[data-theme="dark"]{ color-scheme: dark; }
   html[data-theme="blue"]{ color-scheme: light; }
   html[data-theme="green"]{ color-scheme: light; }
+  html[data-theme="pink"]{ color-scheme: light; }
+  html[data-theme="orange"]{ color-scheme: light; }
   button{ font-family: inherit; }
 
   .app{
@@ -383,6 +415,7 @@
   .reaction-chip.active .reaction-count{ color: var(--accent); }
 
   .meta{ font-size:11px; color: var(--text-sub); margin-top:3px; }
+  .read-status{ font-size:10.5px; color: var(--accent); margin-top:1px; }
   .sender-name{ font-size:12px; color: var(--text-sub); margin: 0 0 2px 2px; }
 
   .composer{ flex-shrink:0; border-top: 1px solid var(--border); padding: 10px 12px; background: var(--panel); }
@@ -409,9 +442,52 @@
   .send-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset:2px; }
 
   .composer-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding: 0 6px; }
-  .hint{ font-size:11px; color: var(--text-sub); }
-  .char-count{ font-size:11px; color: var(--text-sub); }
+  .composer-foot-left{ display:flex; align-items:center; gap:10px; min-width:0; }
+  .hint{ font-size:11px; color: var(--text-sub); white-space:nowrap; }
+  .char-count{ font-size:11px; color: var(--text-sub); flex-shrink:0; }
   .char-count.warn{ color: var(--danger); }
+
+  /* お題ガチャボタン: 控えめな見た目（枠線なし、薄い文字色） */
+  .topic-gacha-btn{
+    border:none;
+    background:transparent;
+    color: var(--text-sub);
+    font-size:11px;
+    cursor:pointer;
+    padding: 2px 6px;
+    border-radius:6px;
+    white-space:nowrap;
+    transition: background .12s ease, color .12s ease;
+  }
+  .topic-gacha-btn:hover{ background: var(--bg); color: var(--accent); }
+
+  /* お題ガチャの結果バナー */
+  .topic-banner{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin: 8px 16px 0;
+    padding: 9px 12px;
+    border-radius: 12px;
+    background: var(--accent-weak);
+    color: var(--text);
+    font-size:13px;
+    flex-shrink:0;
+  }
+  .topic-banner.hidden{ display:none; }
+  .topic-banner-dice{ font-size:15px; flex-shrink:0; }
+  .topic-banner span:not(.topic-banner-dice){ flex:1; }
+  .topic-banner-close{
+    flex-shrink:0;
+    border:none;
+    background:transparent;
+    color: var(--text-sub);
+    font-size:16px;
+    line-height:1;
+    cursor:pointer;
+    padding: 0 4px;
+  }
+  .topic-banner-close:hover{ color: var(--text); }
 
   .banner{
     font-size:13px; padding:8px 14px; background: #fef2f2; color: #b91c1c;
@@ -517,6 +593,8 @@
   .theme-swatch-dark{ background: linear-gradient(135deg, #14151a 50%, #3b82f6 50%); }
   .theme-swatch-blue{ background: linear-gradient(135deg, #eef4fb 50%, #1d6fd6 50%); }
   .theme-swatch-green{ background: linear-gradient(135deg, #eef6ef 50%, #2f9e58 50%); }
+  .theme-swatch-pink{ background: linear-gradient(135deg, #fdf0f5 50%, #e0508f 50%); }
+  .theme-swatch-orange{ background: linear-gradient(135deg, #fdf3ec 50%, #e2762e 50%); }
 </style>
 </head>
 <body>
@@ -545,6 +623,12 @@
     </button>
     <button type="button" class="theme-menu-item" data-theme-value="green" role="menuitem">
       <span class="theme-swatch theme-swatch-green" aria-hidden="true"></span>グリーン
+    </button>
+    <button type="button" class="theme-menu-item" data-theme-value="pink" role="menuitem">
+      <span class="theme-swatch theme-swatch-pink" aria-hidden="true"></span>ピンク
+    </button>
+    <button type="button" class="theme-menu-item" data-theme-value="orange" role="menuitem">
+      <span class="theme-swatch theme-swatch-orange" aria-hidden="true"></span>オレンジ
     </button>
   </div>
 
@@ -696,6 +780,13 @@
       </div>
     </header>
 
+    <!-- お題ガチャの結果を一時的に表示するバナー -->
+    <div class="topic-banner hidden" id="topic-banner">
+      <span class="topic-banner-dice" aria-hidden="true">🎲</span>
+      <span id="topic-banner-text"></span>
+      <button type="button" class="topic-banner-close" id="topic-banner-close" aria-label="閉じる">×</button>
+    </div>
+
     <div class="messages" id="messages" role="log" aria-live="polite" aria-label="チャットメッセージ一覧"></div>
 
     <div class="composer">
@@ -712,7 +803,12 @@
         </button>
       </div>
       <div class="composer-foot">
-        <span class="hint">Enter: 送信　Shift+Enter: 改行</span>
+        <div class="composer-foot-left">
+          <span class="hint">Enter: 送信　Shift+Enter: 改行</span>
+          <button type="button" class="topic-gacha-btn" id="topic-gacha-btn" aria-label="お題ガチャ">
+            🎲 お題ガチャ
+          </button>
+        </div>
         <span class="char-count" id="char-count">0 / 2000</span>
       </div>
     </div>
@@ -734,9 +830,10 @@
 <!-- メインスクリプト（Firebase連携・チャットロジック）。import文を使うため type="module" -->
 <script type="module">
 /* ===========================================================================
-   メインスクリプト（Firebase連携・チャットロジック）
-   Firebase（Firestore + 匿名認証）と連携します。
-   import文を使うため、このscriptタグには type="module" を指定しています。
+   Web Chat - app.js
+   Firebase（Firestore + 匿名認証）と連携するメインスクリプト。
+   このファイルは <script type="module"> として index.html から読み込まれます
+   （import文を使うため module 指定が必須です）。
    =========================================================================== */
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -799,6 +896,30 @@
   var NAME_STORAGE_KEY = "webchat_my_name";
   var REACTION_EMOJIS = ["👍", "❤️", "😂", "😢", "😮"]; // メッセージに付けられるスタンプの種類
 
+  // お題ガチャで表示する話題の一覧（会話のきっかけ用）
+  var GACHA_TOPICS = [
+    "最近見た映画は？",
+    "今ハマっているものは？",
+    "行ってみたい場所は？",
+    "今食べたいものは？",
+    "最近買って良かったものは？",
+    "子供の頃の好きだった遊びは？",
+    "最近笑ったことは？",
+    "好きな季節とその理由は？",
+    "今欲しいものは？",
+    "最近聴いている曲は？",
+    "得意な料理は？",
+    "休日の過ごし方は？",
+    "最近の小さな幸せは？",
+    "もし1日休みがあったら何をする？",
+    "今までで一番驚いた出来事は？",
+    "好きな動物とその理由は？",
+    "最近読んだ本や漫画は？",
+    "学生時代の思い出は？",
+    "今年やりたいことは？",
+    "おすすめのお店はある？"
+  ];
+
   /* =========================================================
      状態管理
      ========================================================= */
@@ -809,6 +930,7 @@
     rooms: [],            // Firestoreから取得した部屋一覧（リアルタイム同期）
     currentRoomId: null,
     currentMessages: [],  // 現在の部屋のメッセージ（リアルタイム同期）
+    othersPresence: [],   // 既読判定用: 自分以外の在室情報 [{uid, lastSeenMs}]
     roomsUnsub: null,
     messagesUnsub: null
   };
@@ -858,6 +980,10 @@
   var $input = document.getElementById("msg-input");
   var $sendBtn = document.getElementById("send-btn");
   var $charCount = document.getElementById("char-count");
+  var $topicGachaBtn = document.getElementById("topic-gacha-btn");
+  var $topicBanner = document.getElementById("topic-banner");
+  var $topicBannerText = document.getElementById("topic-banner-text");
+  var $topicBannerClose = document.getElementById("topic-banner-close");
   var $themeBtn = document.getElementById("theme-toggle");
   var $themeBtnFloating = document.getElementById("theme-toggle-floating");
   var $leaveRoomBtn = document.getElementById("leave-room-btn");
@@ -1378,13 +1504,20 @@
     presenceUnsub = fb.onSnapshot(presenceCol, function (snapshot) {
       var now = Date.now();
       var onlineCount = 0;
+      var others = []; // 既読判定用: 自分以外の {uid, lastSeenMs}
       snapshot.forEach(function (docSnap) {
         var data = docSnap.data();
         var lastSeen = data.lastSeen ? data.lastSeen.toDate().getTime() : 0;
         if (now - lastSeen < PRESENCE_STALE_MS) onlineCount += 1;
+        if (docSnap.id !== state.myUid) {
+          others.push({ uid: docSnap.id, lastSeenMs: lastSeen });
+        }
       });
       if (onlineCount < 1) onlineCount = 1; // 自分が見えている以上は最低1人
       $roomMemberCount.textContent = "オンライン: " + onlineCount + "人";
+
+      state.othersPresence = others;
+      renderAllMessages(); // 既読表示を最新の在室状況で再計算する
     }, function (err) {
       console.error("presence subscribe failed", err);
     });
@@ -1404,6 +1537,7 @@
     if (presenceUnsub) { presenceUnsub(); presenceUnsub = null; }
     window.removeEventListener("beforeunload", removeOwnPresenceOnce);
     removeOwnPresenceOnce();
+    state.othersPresence = [];
   }
 
   function renderAllMessages() {
@@ -1474,8 +1608,28 @@
       wrap.appendChild(buildReactionBar(m));
     }
     wrap.appendChild(meta);
+    if (isMe && !m.deleted && m.createdAt) {
+      var readEl = buildReadStatus(m);
+      if (readEl) wrap.appendChild(readEl);
+    }
     row.appendChild(wrap);
     return row;
+  }
+
+  // 既読表示: 自分が送ったメッセージについて、メッセージ送信後に
+  // 在室確認(presence)があった人数を「既読」としてカウントする
+  function buildReadStatus(m) {
+    var msgTimeMs = m.createdAt.getTime();
+    var readCount = 0;
+    (state.othersPresence || []).forEach(function (p) {
+      if (p.lastSeenMs > msgTimeMs) readCount += 1;
+    });
+    if (readCount === 0) return null;
+
+    var el = document.createElement("div");
+    el.className = "read-status";
+    el.textContent = readCount === 1 ? "既読" : "既読 " + readCount + "人";
+    return el;
   }
 
   // すでに押されているリアクションを集計バッジとして表示する行
@@ -1597,6 +1751,37 @@
     $input.style.height = newHeight + "px";
   }
 
+  /* =========================================================
+     お題ガチャ
+     ========================================================= */
+  var lastGachaTopic = null;
+  var topicBannerHideTimer = null;
+
+  function drawGachaTopic() {
+    var topic = GACHA_TOPICS[Math.floor(Math.random() * GACHA_TOPICS.length)];
+    // 同じお題が連続で出にくいよう、直前と同じなら1回だけ引き直す
+    if (topic === lastGachaTopic && GACHA_TOPICS.length > 1) {
+      topic = GACHA_TOPICS[Math.floor(Math.random() * GACHA_TOPICS.length)];
+    }
+    lastGachaTopic = topic;
+
+    $topicBannerText.textContent = topic;
+    $topicBanner.classList.remove("hidden");
+
+    window.clearTimeout(topicBannerHideTimer);
+    topicBannerHideTimer = window.setTimeout(function () {
+      $topicBanner.classList.add("hidden");
+    }, 15000); // 15秒経ったら自動で隠す（消したくない場合は再度ガチャを押せば良い）
+  }
+
+  $topicGachaBtn.addEventListener("click", drawGachaTopic);
+  $topicBannerClose.addEventListener("click", hideTopicBanner);
+
+  function hideTopicBanner() {
+    window.clearTimeout(topicBannerHideTimer);
+    $topicBanner.classList.add("hidden");
+  }
+
   function handleSend() {
     if (!state.currentRoomId) return;
     var now = Date.now();
@@ -1637,6 +1822,7 @@
   $leaveRoomBtn.addEventListener("click", function () {
     unsubscribeMessages();
     stopPresence();
+    hideTopicBanner();
     state.currentRoomId = null;
     showScreen($screenRooms);
   });
@@ -1673,7 +1859,7 @@
      テーマ切り替え・ネットワーク状態
      ========================================================= */
   var THEME_STORAGE_KEY = "webchat_theme";
-  var VALID_THEMES = ["light", "dark", "blue", "green"];
+  var VALID_THEMES = ["light", "dark", "blue", "green", "pink", "orange"];
   var $themeMenu = document.getElementById("theme-menu");
   var themeMenuItems = Array.prototype.slice.call(document.querySelectorAll(".theme-menu-item"));
 
