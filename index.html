@@ -227,6 +227,49 @@
   }
   .btn-secondary:hover{ background: var(--bg); }
 
+  /* ログイン/新規登録 タブ切り替え */
+  .auth-tabs{
+    display:flex;
+    gap:4px;
+    background: var(--bg);
+    border-radius:10px;
+    padding:4px;
+    margin-bottom:18px;
+  }
+  .auth-tab{
+    flex:1;
+    border:none;
+    background:transparent;
+    color: var(--text-sub);
+    font-size:13.5px;
+    font-weight:600;
+    padding:9px 0;
+    border-radius:8px;
+    cursor:pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .auth-tab.active{ background: var(--panel); color: var(--accent); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+
+  /* 部屋作成: 公開/友達限定 タブ */
+  .room-type-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:4px;
+  }
+  .room-type-tab{
+    flex:1;
+    border:1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-size:13px;
+    font-weight:600;
+    padding:10px 0;
+    border-radius:9px;
+    cursor:pointer;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .room-type-tab.active{ background: var(--accent-weak); border-color: var(--accent); color: var(--accent); }
+
   .room-list-wrap{ flex:1; display:flex; flex-direction:column; min-height:0; }
   .room-list-header{ padding: 18px 20px 8px; flex-shrink:0; }
   .room-list-header h1{ font-size:19px; font-weight:600; margin:0 0 2px; }
@@ -239,6 +282,8 @@
     cursor:pointer; transition: background .15s ease, border-color .15s ease; background: var(--panel);
   }
   .room-item:hover{ background: var(--bg); border-color: var(--text-sub); }
+  .room-item-locked{ opacity:.55; }
+  .room-item-locked:hover{ background: var(--panel); border-color: var(--border); }
   .room-item .room-icon{
     width:40px; height:40px; border-radius:10px; background: var(--accent-weak);
     color: var(--accent); display:flex; align-items:center; justify-content:center; flex-shrink:0;
@@ -247,6 +292,7 @@
   .room-item .room-name{ font-size:14.5px; font-weight:600; margin-bottom:2px; }
   .room-item .room-meta{ font-size:12px; color: var(--text-sub); display:flex; align-items:center; gap:6px; }
   .room-item .room-meta .lock-tag{ display:flex; align-items:center; gap:3px; }
+  .room-item .room-meta .friends-only-tag{ display:flex; align-items:center; gap:3px; color: var(--accent); }
   .room-item .room-delete{
     flex-shrink:0; width:32px; height:32px; border-radius:8px; border:none;
     background:transparent; color: var(--text-sub); display:flex; align-items:center;
@@ -303,6 +349,52 @@
     transition: background .12s ease;
   }
   .my-name-card-edit-btn:hover{ background: var(--accent-weak); }
+  .my-name-card-logout-btn{
+    flex-shrink:0;
+    width:32px; height:32px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-sub);
+    border-radius: 8px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .my-name-card-logout-btn:hover{ background: var(--danger-weak); color: var(--danger); border-color: var(--danger); }
+
+  /* 友達リスト画面 */
+  .friends-header-row{ display:flex; align-items:center; gap:8px; margin-bottom:2px; }
+  .friends-header-row h1{ margin:0; }
+  .friends-add-row{ display:flex; gap:8px; padding: 4px 20px 0; }
+  .friends-add-row input{
+    flex:1; padding: 10px 12px; border-radius:10px;
+    border:1px solid var(--border); background: var(--bg); color: var(--text);
+    font-size:13.5px; outline:none; color-scheme: inherit;
+  }
+  .friends-add-row input:focus{ border-color: var(--accent); }
+  .friends-add-btn{ width:auto; flex-shrink:0; padding: 10px 16px; }
+  .friends-add-error{ margin: 6px 20px 0; }
+  .friends-section{ padding: 0 4px; }
+  .friends-section-title{ font-size:12px; font-weight:600; color: var(--text-sub); padding: 14px 20px 4px; }
+  .friend-item{
+    display:flex; align-items:center; gap:12px; padding: 10px 14px;
+    border-radius: var(--radius); border:1px solid var(--border); margin: 0 16px 8px;
+    background: var(--panel);
+  }
+  .friend-item .friend-avatar{
+    width:34px; height:34px; border-radius:50%; background: var(--accent-weak);
+    color: var(--accent); display:flex; align-items:center; justify-content:center;
+    font-weight:600; font-size:13px; flex-shrink:0;
+  }
+  .friend-item .friend-name{ flex:1; font-size:13.5px; font-weight:600; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .friend-item .friend-action-btn{
+    flex-shrink:0; border:1px solid var(--accent); background: transparent; color: var(--accent);
+    font-size:12px; font-weight:600; padding: 6px 12px; border-radius:8px; cursor:pointer;
+  }
+  .friend-item .friend-action-btn:hover{ background: var(--accent-weak); }
+  .friend-item .friend-action-btn.danger{ border-color: var(--danger); color: var(--danger); }
+  .friend-item .friend-action-btn.danger:hover{ background: var(--danger-weak); }
+  .friend-item .friend-action-row{ display:flex; gap:6px; flex-shrink:0; }
 
   header{
     height: var(--header-h); flex-shrink:0; display:flex; align-items:center;
@@ -646,8 +738,8 @@
     </div>
   </section>
 
-  <!-- ============ 画面1: 名前設定 ============ -->
-  <section class="screen hidden center-screen" id="screen-name">
+  <!-- ============ 画面1: ログイン / 新規登録 ============ -->
+  <section class="screen hidden center-screen" id="screen-auth">
     <div class="form-card">
       <div class="icon-circle" aria-hidden="true">
         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -655,15 +747,27 @@
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
       </div>
-      <h1>表示名を設定</h1>
-      <p class="desc">チャットで表示される名前を入力してください。<br>後からいつでも変更できます。</p>
-      <form id="name-form" novalidate>
-        <div class="field" id="name-field">
-          <label for="name-input">あなたの名前</label>
-          <input type="text" id="name-input" maxlength="20" placeholder="例：たなか" autocomplete="off" />
-          <div class="error-text" id="name-error">名前を入力してください（1〜20文字）。</div>
+      <h1 id="auth-title">ログイン</h1>
+      <p class="desc" id="auth-desc">ニックネームとパスワードでログインしてください。</p>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="auth-tab-login" data-auth-mode="login">ログイン</button>
+        <button type="button" class="auth-tab" id="auth-tab-register" data-auth-mode="register">新規登録</button>
+      </div>
+
+      <form id="auth-form" novalidate>
+        <div class="field" id="auth-nickname-field">
+          <label for="auth-nickname-input">ニックネーム</label>
+          <input type="text" id="auth-nickname-input" maxlength="20" placeholder="例：たなか" autocomplete="off" />
+          <div class="hint-text" id="auth-nickname-hint">他の人と被らない名前を選んでください。後から変更はできません。</div>
+          <div class="error-text" id="auth-nickname-error">ニックネームを入力してください（1〜20文字）。</div>
         </div>
-        <button type="submit" class="btn-primary" id="name-submit-btn">次へ</button>
+        <div class="field" id="auth-password-field">
+          <label for="auth-password-input">パスワード</label>
+          <input type="password" id="auth-password-input" maxlength="100" placeholder="6文字以上" autocomplete="off" />
+          <div class="error-text" id="auth-password-error">パスワードを入力してください（6文字以上）。</div>
+        </div>
+        <button type="submit" class="btn-primary" id="auth-submit-btn">ログイン</button>
       </form>
     </div>
   </section>
@@ -682,10 +786,13 @@
             </svg>
           </div>
           <div class="my-name-card-text">
-            <div class="my-name-card-label">あなたの表示名</div>
+            <div class="my-name-card-label">ログイン中のニックネーム</div>
             <div class="my-name-card-value" id="me-chip-name"></div>
           </div>
-          <button type="button" class="my-name-card-edit-btn" id="change-name-btn">変更する</button>
+          <button type="button" class="my-name-card-edit-btn" id="open-friends-btn">友達</button>
+          <button type="button" class="my-name-card-logout-btn" id="logout-btn" aria-label="ログアウト" title="ログアウト">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          </button>
         </div>
       </div>
       <div class="room-list" id="room-list"></div>
@@ -694,6 +801,37 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
           新しい部屋を作る
         </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 画面: 友達リスト ============ -->
+  <section class="screen hidden" id="screen-friends">
+    <div class="room-list-wrap">
+      <div class="room-list-header">
+        <div class="friends-header-row">
+          <button class="icon-btn" id="friends-back-btn" aria-label="戻る" title="戻る">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          </button>
+          <h1>友達</h1>
+        </div>
+        <div class="sub">友達と、友達限定の部屋を作って遊べます</div>
+      </div>
+
+      <div class="friends-add-row">
+        <input type="text" id="friend-add-input" maxlength="20" placeholder="ニックネームを入力して申請" autocomplete="off" />
+        <button type="button" class="btn-primary friends-add-btn" id="friend-add-btn">申請</button>
+      </div>
+      <div class="error-text friends-add-error" id="friend-add-error"></div>
+
+      <div class="friends-section" id="friends-requests-section">
+        <div class="friends-section-title">届いている申請</div>
+        <div class="room-list" id="friend-requests-list"></div>
+      </div>
+
+      <div class="friends-section">
+        <div class="friends-section-title">友達一覧</div>
+        <div class="room-list" id="friends-list"></div>
       </div>
     </div>
   </section>
@@ -707,8 +845,16 @@
         </svg>
       </div>
       <h1>新しい部屋を作る</h1>
-      <p class="desc">部屋名と合言葉（入室コード）を設定してください。</p>
+      <p class="desc">部屋の種類・部屋名を設定してください。</p>
       <form id="create-room-form" novalidate>
+        <div class="field">
+          <label>部屋の種類</label>
+          <div class="room-type-tabs">
+            <button type="button" class="room-type-tab active" id="room-type-public" data-room-type="public">公開部屋</button>
+            <button type="button" class="room-type-tab" id="room-type-friends" data-room-type="friends">友達限定</button>
+          </div>
+          <div class="hint-text" id="room-type-hint">合言葉を知っている人なら誰でも入れます。</div>
+        </div>
         <div class="field" id="room-name-field">
           <label for="room-name-input">部屋名</label>
           <input type="text" id="room-name-input" maxlength="30" placeholder="例：雑談ルーム" autocomplete="off" />
@@ -832,7 +978,7 @@
 <script type="module">
 /* ===========================================================================
    Web Chat - app.js
-   Firebase（Firestore + 匿名認証）と連携するメインスクリプト。
+   Firebase（Firestore + ニックネーム/パスワード認証）と連携するメインスクリプト。
    このファイルは <script type="module"> として index.html から読み込まれます
    （import文を使うため module 指定が必須です）。
    =========================================================================== */
@@ -840,8 +986,11 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import {
     getAuth,
-    signInAnonymously,
-    onAuthStateChanged
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut,
+    updateProfile
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   import {
     getFirestore,
@@ -853,7 +1002,9 @@
     deleteDoc,
     onSnapshot,
     getDocs,
+    getDoc,
     query,
+    where,
     orderBy,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -877,9 +1028,9 @@
   // このファイル内の後半部分（メインロジック）から使えるように window に橋渡しする
   window.__firebase = {
     auth, db,
-    signInAnonymously, onAuthStateChanged,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile,
     collection, doc, addDoc, setDoc, updateDoc, deleteDoc,
-    onSnapshot, getDocs, query, orderBy, serverTimestamp
+    onSnapshot, getDocs, getDoc, query, where, orderBy, serverTimestamp
   };
   window.dispatchEvent(new Event("firebase-ready"));
 
@@ -890,11 +1041,22 @@
      設定値
      ========================================================= */
   var MAX_LENGTH = 2000;
-  var MAX_NAME_LENGTH = 20;
+  var MAX_NICKNAME_LENGTH = 20;
+  var MIN_PASSWORD_LENGTH = 6;
+  var FAKE_EMAIL_DOMAIN = "@riku-chat.local"; // ニックネームをFirebase Authのメール欄に渡すための固定ドメイン
+
+  // ニックネームを正規化する（大文字小文字や前後の空白の違いを同一人物として扱うため）
+  function normalizeNickname(nickname) {
+    return nickname.trim().toLowerCase();
+  }
+  // 正規化したニックネームをFirebase Auth用の「偽のメールアドレス」に変換する
+  function nicknameToFakeEmail(nickname) {
+    return normalizeNickname(nickname) + FAKE_EMAIL_DOMAIN;
+  }
+
   var MAX_ROOM_NAME_LENGTH = 30;
   var MAX_PASS_LENGTH = 30;
   var RATE_LIMIT_MS = 600;
-  var NAME_STORAGE_KEY = "webchat_my_name";
   var REACTION_EMOJIS = ["👍", "❤️", "😂", "😢", "😮"]; // メッセージに付けられるスタンプの種類
 
   // お題ガチャで表示する話題の一覧（会話のきっかけ用）
@@ -933,7 +1095,13 @@
     currentMessages: [],  // 現在の部屋のメッセージ（リアルタイム同期）
     othersReadReceipts: [], // 既読判定用: 自分以外の既読時刻 [{uid, lastReadAtMs}]
     roomsUnsub: null,
-    messagesUnsub: null
+    messagesUnsub: null,
+    authMode: "login",     // "login" | "register"
+    friends: [],            // 確定した友達一覧 [{uid, nickname}]
+    friendRequestsIncoming: [], // 自分宛に届いている申請 [{id, fromUid, fromNickname}]
+    friendsUnsub: null,
+    friendRequestsUnsub: null,
+    selectedRoomType: "public" // "public" | "friends"
   };
   var lastSendTime = 0;
   var fb = null; // window.__firebase が入る
@@ -947,26 +1115,45 @@
   var $bannerReloadBtn = document.getElementById("banner-reload-btn");
 
   var $screenLoading = document.getElementById("screen-loading");
-  var $screenName = document.getElementById("screen-name");
+  var $screenAuth = document.getElementById("screen-auth");
   var $screenRooms = document.getElementById("screen-rooms");
+  var $screenFriends = document.getElementById("screen-friends");
   var $screenCreateRoom = document.getElementById("screen-create-room");
   var $screenJoinPasscode = document.getElementById("screen-join-passcode");
   var $screenChat = document.getElementById("screen-chat");
 
-  var $nameForm = document.getElementById("name-form");
-  var $nameInput = document.getElementById("name-input");
-  var $nameField = document.getElementById("name-field");
+  var $authForm = document.getElementById("auth-form");
+  var $authTitle = document.getElementById("auth-title");
+  var $authDesc = document.getElementById("auth-desc");
+  var $authTabLogin = document.getElementById("auth-tab-login");
+  var $authTabRegister = document.getElementById("auth-tab-register");
+  var $authNicknameInput = document.getElementById("auth-nickname-input");
+  var $authNicknameField = document.getElementById("auth-nickname-field");
+  var $authNicknameHint = document.getElementById("auth-nickname-hint");
+  var $authPasswordInput = document.getElementById("auth-password-input");
+  var $authPasswordField = document.getElementById("auth-password-field");
+  var $authSubmitBtn = document.getElementById("auth-submit-btn");
 
   var $meChipName = document.getElementById("me-chip-name");
-  var $changeNameBtn = document.getElementById("change-name-btn");
+  var $logoutBtn = document.getElementById("logout-btn");
+  var $openFriendsBtn = document.getElementById("open-friends-btn");
+  var $friendsBackBtn = document.getElementById("friends-back-btn");
+  var $friendAddInput = document.getElementById("friend-add-input");
+  var $friendAddBtn = document.getElementById("friend-add-btn");
+  var $friendAddError = document.getElementById("friend-add-error");
+  var $friendRequestsList = document.getElementById("friend-requests-list");
+  var $friendsList = document.getElementById("friends-list");
   var $roomList = document.getElementById("room-list");
   var $newRoomBtn = document.getElementById("new-room-btn");
 
   var $createRoomForm = document.getElementById("create-room-form");
+  var $roomTypePublicBtn = document.getElementById("room-type-public");
+  var $roomTypeFriendsBtn = document.getElementById("room-type-friends");
+  var $roomTypeHint = document.getElementById("room-type-hint");
   var $roomNameInput = document.getElementById("room-name-input");
   var $roomNameField = document.getElementById("room-name-field");
-  var $roomPassInput = document.getElementById("room-pass-input");
   var $roomPassField = document.getElementById("room-pass-field");
+  var $roomPassInput = document.getElementById("room-pass-input");
   var $createRoomCancelBtn = document.getElementById("create-room-cancel-btn");
   var $createRoomSubmitBtn = document.getElementById("create-room-submit-btn");
 
@@ -1022,7 +1209,7 @@
   $bannerReloadBtn.addEventListener("click", function () { window.location.reload(); });
 
   function showScreen(el) {
-    [$screenLoading, $screenName, $screenRooms, $screenCreateRoom, $screenJoinPasscode, $screenChat].forEach(function (s) {
+    [$screenLoading, $screenAuth, $screenRooms, $screenFriends, $screenCreateRoom, $screenJoinPasscode, $screenChat].forEach(function (s) {
       s.classList.add("hidden");
     });
     el.classList.remove("hidden");
@@ -1114,40 +1301,362 @@
   $confirmModal.addEventListener("click", function (e) { if (e.target === $confirmModal) closeConfirmModal(); });
 
   /* =========================================================
-     名前設定（localStorageに保存。Firestoreには送らない）
+     ログイン / 新規登録
+     ニックネームは Firestore の "usernames" コレクション
+     （ドキュメントID = 正規化したニックネーム）でユニーク性を管理する。
+     Firebase Authentication 自体はメール/パスワード方式を使い、
+     ニックネームを "nickname@riku-chat.local" という固定ドメインの
+     偽メールアドレスに変換して登録・ログインする。
      ========================================================= */
-  function loadSavedName() {
-    try { return localStorage.getItem(NAME_STORAGE_KEY) || ""; }
-    catch (e) { return ""; }
-  }
-  function saveName(name) {
-    try { localStorage.setItem(NAME_STORAGE_KEY, name); }
-    catch (e) { /* プライベートモード等で失敗しても致命的ではないため無視 */ }
+  function setAuthMode(mode) {
+    state.authMode = mode;
+    var isRegister = mode === "register";
+    $authTabLogin.classList.toggle("active", !isRegister);
+    $authTabRegister.classList.toggle("active", isRegister);
+    $authTitle.textContent = isRegister ? "新規登録" : "ログイン";
+    $authDesc.textContent = isRegister
+      ? "はじめて使う方は、ニックネームとパスワードを決めてください。"
+      : "ニックネームとパスワードでログインしてください。";
+    $authNicknameHint.classList.toggle("hidden", !isRegister);
+    $authSubmitBtn.textContent = isRegister ? "登録する" : "ログイン";
+    setFieldError($authNicknameField, false);
+    setFieldError($authPasswordField, false);
   }
 
-  function goToNameScreen() {
-    $nameInput.value = state.myName || loadSavedName() || "";
-    setFieldError($nameField, false);
-    showScreen($screenName);
-    window.setTimeout(function () { $nameInput.focus(); }, 0);
+  $authTabLogin.addEventListener("click", function () { setAuthMode("login"); });
+  $authTabRegister.addEventListener("click", function () { setAuthMode("register"); });
+
+  function goToAuthScreen() {
+    $authNicknameInput.value = "";
+    $authPasswordInput.value = "";
+    setAuthMode("login");
+    showScreen($screenAuth);
+    window.setTimeout(function () { $authNicknameInput.focus(); }, 0);
   }
 
-  $nameForm.addEventListener("submit", function (e) {
+  $authForm.addEventListener("submit", function (e) {
     e.preventDefault();
-    var name = sanitizeText($nameInput.value, MAX_NAME_LENGTH);
-    if (name.length === 0) {
-      setFieldError($nameField, true);
-      $nameInput.focus();
-      return;
+    var nickname = sanitizeText($authNicknameInput.value, MAX_NICKNAME_LENGTH);
+    var password = $authPasswordInput.value;
+
+    var hasError = false;
+    if (nickname.length === 0) { setFieldError($authNicknameField, true); hasError = true; }
+    else { setFieldError($authNicknameField, false); }
+    if (password.length < MIN_PASSWORD_LENGTH) { setFieldError($authPasswordField, true); hasError = true; }
+    else { setFieldError($authPasswordField, false); }
+    if (hasError) return;
+
+    setBusy($authSubmitBtn, true, "処理中…", state.authMode === "register" ? "登録する" : "ログイン");
+
+    if (state.authMode === "register") {
+      registerNewAccount(nickname, password);
+    } else {
+      loginExistingAccount(nickname, password);
     }
-    setFieldError($nameField, false);
-    state.myName = name;
-    saveName(name);
-    showScreen($screenRooms);
-    subscribeRooms();
   });
 
-  $changeNameBtn.addEventListener("click", function () { goToNameScreen(); });
+  function finishAuthBusy() {
+    setBusy($authSubmitBtn, false, "処理中…", state.authMode === "register" ? "登録する" : "ログイン");
+  }
+
+  function registerNewAccount(nickname, password) {
+    var normalized = normalizeNickname(nickname);
+    var usernameRef = fb.doc(fb.db, "usernames", normalized);
+
+    fb.getDoc(usernameRef).then(function (snap) {
+      if (snap.exists()) {
+        finishAuthBusy();
+        setFieldError($authNicknameField, true);
+        $authNicknameHint.textContent = "そのニックネームは既に使われています。別の名前を試してください。";
+        $authNicknameHint.classList.remove("hidden");
+        return Promise.reject({ handled: true });
+      }
+      var fakeEmail = nicknameToFakeEmail(nickname);
+      return fb.createUserWithEmailAndPassword(fb.auth, fakeEmail, password);
+    }).then(function (cred) {
+      var uid = cred.user.uid;
+      // ニックネームの占有記録と、ユーザー本体のプロフィールを保存する
+      return Promise.all([
+        fb.setDoc(usernameRef, { uid: uid, nickname: nickname }),
+        fb.setDoc(fb.doc(fb.db, "users", uid), { nickname: nickname, createdAt: fb.serverTimestamp() })
+      ]);
+    }).then(function () {
+      finishAuthBusy();
+      // onAuthStateChanged が発火して自動的にログイン後の画面に進む
+    }).catch(function (err) {
+      if (err && err.handled) return; // 既にエラー表示済み
+      finishAuthBusy();
+      console.error(err);
+      if (err && err.code === "auth/email-already-in-use") {
+        setFieldError($authNicknameField, true);
+        $authNicknameHint.textContent = "そのニックネームは既に使われています。別の名前を試してください。";
+        $authNicknameHint.classList.remove("hidden");
+      } else if (err && err.code === "auth/weak-password") {
+        setFieldError($authPasswordField, true);
+      } else {
+        showError("登録に失敗しました。通信環境をご確認ください。");
+      }
+    });
+  }
+
+  function loginExistingAccount(nickname, password) {
+    var fakeEmail = nicknameToFakeEmail(nickname);
+    fb.signInWithEmailAndPassword(fb.auth, fakeEmail, password).then(function () {
+      finishAuthBusy();
+      // onAuthStateChanged が発火して自動的にログイン後の画面に進む
+    }).catch(function (err) {
+      finishAuthBusy();
+      console.error(err);
+      if (err && (err.code === "auth/user-not-found" || err.code === "auth/invalid-credential" || err.code === "auth/wrong-password")) {
+        setFieldError($authPasswordField, true);
+        showError("ニックネームまたはパスワードが正しくありません。");
+      } else {
+        showError("ログインに失敗しました。通信環境をご確認ください。");
+      }
+    });
+  }
+
+  $logoutBtn.addEventListener("click", function () {
+    openConfirmModal(
+      "ログアウトしますか？",
+      "次回はニックネームとパスワードで再度ログインが必要になります。",
+      function () {
+        fb.signOut(fb.auth).catch(function (err) { console.error(err); });
+      }
+    );
+  });
+
+  /* =========================================================
+     友達機能
+     - friendRequests コレクション: 申請1件 = 1ドキュメント
+       { fromUid, fromNickname, toUid, toNickname, status: "pending" }
+     - 承認されると users/{uid}/friends/{friendUid} に双方向で書き込む
+     ========================================================= */
+  function subscribeFriendsAndRequests() {
+    unsubscribeFriendsAndRequests();
+    if (!state.myUid) return;
+
+    // 自分の友達一覧（サブコレクション）をリアルタイム購読
+    var friendsCol = fb.collection(fb.db, "users", state.myUid, "friends");
+    state.friendsUnsub = fb.onSnapshot(friendsCol, function (snapshot) {
+      state.friends = [];
+      snapshot.forEach(function (docSnap) {
+        var data = docSnap.data();
+        state.friends.push({ uid: docSnap.id, nickname: data.nickname || "" });
+      });
+      renderFriendsList();
+    }, function (err) {
+      console.error("friends subscribe failed", err);
+    });
+
+    // 自分宛に届いている申請（pending）をリアルタイム購読
+    var requestsCol = fb.collection(fb.db, "friendRequests");
+    var q = fb.query(requestsCol, fb.where("toUid", "==", state.myUid), fb.where("status", "==", "pending"));
+    state.friendRequestsUnsub = fb.onSnapshot(q, function (snapshot) {
+      state.friendRequestsIncoming = [];
+      snapshot.forEach(function (docSnap) {
+        var data = docSnap.data();
+        state.friendRequestsIncoming.push({
+          id: docSnap.id,
+          fromUid: data.fromUid || "",
+          fromNickname: data.fromNickname || ""
+        });
+      });
+      renderFriendsList();
+    }, function (err) {
+      console.error("friend requests subscribe failed", err);
+    });
+  }
+
+  function unsubscribeFriendsAndRequests() {
+    if (state.friendsUnsub) { state.friendsUnsub(); state.friendsUnsub = null; }
+    if (state.friendRequestsUnsub) { state.friendRequestsUnsub(); state.friendRequestsUnsub = null; }
+    state.friends = [];
+    state.friendRequestsIncoming = [];
+  }
+
+  function renderFriendsList() {
+    // 届いている申請
+    $friendRequestsList.innerHTML = "";
+    if (state.friendRequestsIncoming.length === 0) {
+      var emptyReq = document.createElement("div");
+      emptyReq.className = "empty-state";
+      emptyReq.textContent = "届いている申請はありません。";
+      $friendRequestsList.appendChild(emptyReq);
+    } else {
+      state.friendRequestsIncoming.forEach(function (req) {
+        var item = document.createElement("div");
+        item.className = "friend-item";
+
+        var avatar = document.createElement("div");
+        avatar.className = "friend-avatar";
+        avatar.textContent = req.fromNickname.charAt(0);
+
+        var nameEl = document.createElement("div");
+        nameEl.className = "friend-name";
+        nameEl.textContent = req.fromNickname;
+
+        var actionRow = document.createElement("div");
+        actionRow.className = "friend-action-row";
+
+        var acceptBtn = document.createElement("button");
+        acceptBtn.className = "friend-action-btn";
+        acceptBtn.textContent = "承認";
+        acceptBtn.addEventListener("click", function () { acceptFriendRequest(req); });
+
+        var rejectBtn = document.createElement("button");
+        rejectBtn.className = "friend-action-btn danger";
+        rejectBtn.textContent = "拒否";
+        rejectBtn.addEventListener("click", function () { rejectFriendRequest(req.id); });
+
+        actionRow.appendChild(acceptBtn);
+        actionRow.appendChild(rejectBtn);
+
+        item.appendChild(avatar);
+        item.appendChild(nameEl);
+        item.appendChild(actionRow);
+        $friendRequestsList.appendChild(item);
+      });
+    }
+
+    // 友達一覧
+    $friendsList.innerHTML = "";
+    if (state.friends.length === 0) {
+      var emptyFriends = document.createElement("div");
+      emptyFriends.className = "empty-state";
+      emptyFriends.textContent = "まだ友達がいません。ニックネームを入力して申請してみましょう。";
+      $friendsList.appendChild(emptyFriends);
+    } else {
+      state.friends.forEach(function (friend) {
+        var item = document.createElement("div");
+        item.className = "friend-item";
+
+        var avatar = document.createElement("div");
+        avatar.className = "friend-avatar";
+        avatar.textContent = friend.nickname.charAt(0);
+
+        var nameEl = document.createElement("div");
+        nameEl.className = "friend-name";
+        nameEl.textContent = friend.nickname;
+
+        var removeBtn = document.createElement("button");
+        removeBtn.className = "friend-action-btn danger";
+        removeBtn.textContent = "削除";
+        removeBtn.addEventListener("click", function () { confirmRemoveFriend(friend); });
+
+        item.appendChild(avatar);
+        item.appendChild(nameEl);
+        item.appendChild(removeBtn);
+        $friendsList.appendChild(item);
+      });
+    }
+  }
+
+  $openFriendsBtn.addEventListener("click", function () {
+    $friendAddInput.value = "";
+    $friendAddError.textContent = "";
+    showScreen($screenFriends);
+  });
+  $friendsBackBtn.addEventListener("click", function () { showScreen($screenRooms); });
+
+  $friendAddBtn.addEventListener("click", function () { sendFriendRequest(); });
+  $friendAddInput.addEventListener("keydown", function (e) {
+    if (e.isComposing) return;
+    if (e.key === "Enter") { e.preventDefault(); sendFriendRequest(); }
+  });
+
+  function sendFriendRequest() {
+    var targetNickname = sanitizeText($friendAddInput.value, MAX_NICKNAME_LENGTH);
+    $friendAddError.textContent = "";
+    if (targetNickname.length === 0) return;
+
+    var normalizedTarget = normalizeNickname(targetNickname);
+    if (normalizedTarget === normalizeNickname(state.myName)) {
+      $friendAddError.textContent = "自分自身には申請できません。";
+      return;
+    }
+    // 既に友達かどうかを確認
+    var alreadyFriend = state.friends.some(function (f) { return normalizeNickname(f.nickname) === normalizedTarget; });
+    if (alreadyFriend) {
+      $friendAddError.textContent = "すでに友達です。";
+      return;
+    }
+
+    setBusy($friendAddBtn, true, "送信中…", "申請");
+
+    fb.getDoc(fb.doc(fb.db, "usernames", normalizedTarget)).then(function (snap) {
+      if (!snap.exists()) {
+        setBusy($friendAddBtn, false, "送信中…", "申請");
+        $friendAddError.textContent = "そのニックネームのユーザーが見つかりません。";
+        return Promise.reject({ handled: true });
+      }
+      var targetUid = snap.data().uid;
+      var targetNicknameExact = snap.data().nickname || targetNickname;
+
+      var requestsCol = fb.collection(fb.db, "friendRequests");
+      return fb.addDoc(requestsCol, {
+        fromUid: state.myUid,
+        fromNickname: state.myName,
+        toUid: targetUid,
+        toNickname: targetNicknameExact,
+        status: "pending",
+        createdAt: fb.serverTimestamp()
+      });
+    }).then(function () {
+      setBusy($friendAddBtn, false, "送信中…", "申請");
+      $friendAddInput.value = "";
+      showError("友達申請を送りました。");
+    }).catch(function (err) {
+      if (err && err.handled) return;
+      setBusy($friendAddBtn, false, "送信中…", "申請");
+      console.error(err);
+      $friendAddError.textContent = "申請の送信に失敗しました。通信環境をご確認ください。";
+    });
+  }
+
+  function acceptFriendRequest(req) {
+    // 双方の friends サブコレクションに追加し、申請ドキュメントを削除する
+    var myFriendRef = fb.doc(fb.db, "users", state.myUid, "friends", req.fromUid);
+    var theirFriendRef = fb.doc(fb.db, "users", req.fromUid, "friends", state.myUid);
+    var requestRef = fb.doc(fb.db, "friendRequests", req.id);
+
+    Promise.all([
+      fb.setDoc(myFriendRef, { nickname: req.fromNickname }),
+      fb.setDoc(theirFriendRef, { nickname: state.myName })
+    ]).then(function () {
+      return fb.deleteDoc(requestRef);
+    }).catch(function (err) {
+      console.error(err);
+      showError("友達申請の承認に失敗しました。通信環境をご確認ください。");
+    });
+  }
+
+  function rejectFriendRequest(requestId) {
+    fb.deleteDoc(fb.doc(fb.db, "friendRequests", requestId)).catch(function (err) {
+      console.error(err);
+      showError("申請の拒否に失敗しました。");
+    });
+  }
+
+  function confirmRemoveFriend(friend) {
+    openConfirmModal(
+      "友達を削除しますか？",
+      "「" + friend.nickname + "」を友達リストから削除します。",
+      function () { removeFriend(friend); }
+    );
+  }
+
+  function removeFriend(friend) {
+    var myFriendRef = fb.doc(fb.db, "users", state.myUid, "friends", friend.uid);
+    var theirFriendRef = fb.doc(fb.db, "users", friend.uid, "friends", state.myUid);
+    Promise.all([
+      fb.deleteDoc(myFriendRef),
+      fb.deleteDoc(theirFriendRef)
+    ]).catch(function (err) {
+      console.error(err);
+      showError("友達の削除に失敗しました。");
+    });
+  }
 
   /* =========================================================
      画面2: 部屋選択（Firestoreの "rooms" コレクションをリアルタイム購読）
@@ -1172,6 +1681,9 @@
           id: docSnap.id,
           name: data.name || "",
           passHash: data.passHash || "",
+          roomType: data.roomType || "public", // "public" | "friends"
+          createdBy: data.createdBy || "",
+          allowedUids: data.allowedUids || [], // 友達限定部屋: 入室可能なuidの一覧（作成者含む）
           createdAt: data.createdAt
         });
       });
@@ -1192,8 +1704,11 @@
       return;
     }
     state.rooms.forEach(function (room) {
+      var isFriendsRoom = room.roomType === "friends";
+      var canEnter = !isFriendsRoom || room.allowedUids.indexOf(state.myUid) !== -1;
+
       var item = document.createElement("div");
-      item.className = "room-item";
+      item.className = "room-item" + (canEnter ? "" : " room-item-locked");
       item.setAttribute("role", "button");
       item.setAttribute("tabindex", "0");
 
@@ -1211,13 +1726,24 @@
 
       var metaEl = document.createElement("div");
       metaEl.className = "room-meta";
-      var lockTag = document.createElement("span");
-      lockTag.className = "lock-tag";
-      lockTag.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
-      var lockText = document.createElement("span");
-      lockText.textContent = "合言葉が必要";
-      lockTag.appendChild(lockText);
-      metaEl.appendChild(lockTag);
+
+      if (isFriendsRoom) {
+        var friendsTag = document.createElement("span");
+        friendsTag.className = "friends-only-tag";
+        friendsTag.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>';
+        var friendsText = document.createElement("span");
+        friendsText.textContent = canEnter ? "友達限定" : "友達限定（入室できません）";
+        friendsTag.appendChild(friendsText);
+        metaEl.appendChild(friendsTag);
+      } else {
+        var lockTag = document.createElement("span");
+        lockTag.className = "lock-tag";
+        lockTag.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>';
+        var lockText = document.createElement("span");
+        lockText.textContent = "合言葉が必要";
+        lockTag.appendChild(lockText);
+        metaEl.appendChild(lockTag);
+      }
       info.appendChild(nameEl);
       info.appendChild(metaEl);
 
@@ -1235,7 +1761,18 @@
       item.appendChild(info);
       item.appendChild(deleteBtn);
 
-      function openJoin() { startJoinFlow(room.id); }
+      function openJoin() {
+        if (!canEnter) {
+          showError("この部屋は友達限定のため入室できません。");
+          return;
+        }
+        if (isFriendsRoom) {
+          // 友達限定部屋は合言葉不要で即入室
+          enterRoom(room.id, room.name);
+        } else {
+          startJoinFlow(room.id);
+        }
+      }
       item.addEventListener("click", openJoin);
       item.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openJoin(); }
@@ -1304,6 +1841,7 @@
     $roomPassInput.value = "";
     setFieldError($roomNameField, false);
     setFieldError($roomPassField, false);
+    setRoomTypeTab("public");
     showScreen($screenCreateRoom);
     window.setTimeout(function () { $roomNameInput.focus(); }, 0);
   });
@@ -1311,36 +1849,76 @@
   /* =========================================================
      画面3: 新規部屋作成
      ========================================================= */
+  function setRoomTypeTab(type) {
+    state.selectedRoomType = type;
+    var isFriends = type === "friends";
+    $roomTypePublicBtn.classList.toggle("active", !isFriends);
+    $roomTypeFriendsBtn.classList.toggle("active", isFriends);
+    $roomPassField.classList.toggle("hidden", isFriends);
+    $roomTypeHint.textContent = isFriends
+      ? "合言葉は不要です。あなたの友達だけが入室できます。"
+      : "合言葉を知っている人なら誰でも入れます。";
+  }
+  $roomTypePublicBtn.addEventListener("click", function () { setRoomTypeTab("public"); });
+  $roomTypeFriendsBtn.addEventListener("click", function () { setRoomTypeTab("friends"); });
+
   $createRoomForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var roomName = sanitizeText($roomNameInput.value, MAX_ROOM_NAME_LENGTH);
-    var roomPass = sanitizeText($roomPassInput.value, MAX_PASS_LENGTH);
+    var isFriendsRoom = state.selectedRoomType === "friends";
 
     var hasError = false;
     if (roomName.length === 0) { setFieldError($roomNameField, true); hasError = true; }
     else { setFieldError($roomNameField, false); }
-    if (roomPass.length === 0) { setFieldError($roomPassField, true); hasError = true; }
-    else { setFieldError($roomPassField, false); }
+
+    var roomPass = "";
+    if (!isFriendsRoom) {
+      roomPass = sanitizeText($roomPassInput.value, MAX_PASS_LENGTH);
+      if (roomPass.length === 0) { setFieldError($roomPassField, true); hasError = true; }
+      else { setFieldError($roomPassField, false); }
+    }
     if (hasError) return;
 
     setBusy($createRoomSubmitBtn, true, "作成中…", "部屋を作成");
 
-    hashPasscode(roomPass).then(function (passHash) {
+    if (isFriendsRoom) {
+      // 友達限定部屋: 合言葉は使わず、現在の友達全員＋自分のuidを許可リストとして保存する
+      var allowedUids = state.friends.map(function (f) { return f.uid; });
+      allowedUids.push(state.myUid);
       var roomsCol = fb.collection(fb.db, "rooms");
-      return fb.addDoc(roomsCol, {
+      fb.addDoc(roomsCol, {
         name: roomName,
-        passHash: passHash,
+        roomType: "friends",
+        allowedUids: allowedUids,
         createdAt: fb.serverTimestamp(),
         createdBy: state.myUid
+      }).then(function (docRef) {
+        setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
+        enterRoom(docRef.id, roomName);
+      }).catch(function (err) {
+        console.error(err);
+        setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
+        showError("部屋の作成に失敗しました。通信環境をご確認ください。");
       });
-    }).then(function (docRef) {
-      setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
-      enterRoom(docRef.id, roomName);
-    }).catch(function (err) {
-      console.error(err);
-      setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
-      showError("部屋の作成に失敗しました。通信環境をご確認ください。");
-    });
+    } else {
+      hashPasscode(roomPass).then(function (passHash) {
+        var roomsCol = fb.collection(fb.db, "rooms");
+        return fb.addDoc(roomsCol, {
+          name: roomName,
+          roomType: "public",
+          passHash: passHash,
+          createdAt: fb.serverTimestamp(),
+          createdBy: state.myUid
+        });
+      }).then(function (docRef) {
+        setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
+        enterRoom(docRef.id, roomName);
+      }).catch(function (err) {
+        console.error(err);
+        setBusy($createRoomSubmitBtn, false, "作成中…", "部屋を作成");
+        showError("部屋の作成に失敗しました。通信環境をご確認ください。");
+      });
+    }
   });
 
   $createRoomCancelBtn.addEventListener("click", function () { showScreen($screenRooms); });
@@ -1453,43 +2031,9 @@
   function startPresence(roomId) {
     stopPresence();
     if (!state.myUid) return;
-
-    var presenceCol = fb.collection(fb.db, "rooms", roomId, "presence");
-
-    // 入室時に一度だけ、同じ部屋に同名の人がいないか確認し、
-    // 重複していれば「name(2)」のように連番を付けた表示名を使う
-    fb.getDocs(presenceCol).then(function (snapshot) {
-      var usedNames = [];
-      snapshot.forEach(function (docSnap) {
-        if (docSnap.id === state.myUid) return; // 自分自身は比較対象から除く
-        var data = docSnap.data();
-        var lastSeen = data.lastSeen ? data.lastSeen.toDate().getTime() : 0;
-        if (Date.now() - lastSeen < PRESENCE_STALE_MS && data.name) {
-          usedNames.push(data.name);
-        }
-      });
-      state.roomDisplayName = resolveUniqueName(state.myName, usedNames);
-      if (state.roomDisplayName !== state.myName) {
-        // 同名の人がいたため連番が付いたことを、控えめに一度だけ知らせる
-        showError("この部屋には同じ名前の人がいるため、今回は「" + state.roomDisplayName + "」として表示されます。");
-      }
-      beginPresenceHeartbeatAndSubscription(roomId);
-    }).catch(function (err) {
-      console.error("presence lookup failed", err);
-      // 重複チェックに失敗しても通常名のまま参加できるようにする
-      state.roomDisplayName = state.myName;
-      beginPresenceHeartbeatAndSubscription(roomId);
-    });
-  }
-
-  // 既に使われている名前一覧の中で重複しないよう、必要なら "(2)" のように連番を付ける
-  function resolveUniqueName(baseName, usedNames) {
-    if (usedNames.indexOf(baseName) === -1) return baseName;
-    var n = 2;
-    while (usedNames.indexOf(baseName + "(" + n + ")") !== -1) {
-      n += 1;
-    }
-    return baseName + "(" + n + ")";
+    // ニックネームはアプリ全体でユニークなため、部屋ごとの重複チェックは不要
+    state.roomDisplayName = state.myName;
+    beginPresenceHeartbeatAndSubscription(roomId);
   }
 
   function beginPresenceHeartbeatAndSubscription(roomId) {
@@ -1989,19 +2533,29 @@
     fb.onAuthStateChanged(fb.auth, function (user) {
       if (user) {
         state.myUid = user.uid;
-        var saved = loadSavedName();
-        if (saved) {
-          state.myName = saved;
+        // ログイン済みになったら、ユーザー本体のドキュメントからニックネームを取得する
+        fb.getDoc(fb.doc(fb.db, "users", user.uid)).then(function (snap) {
+          if (snap.exists()) {
+            state.myName = snap.data().nickname || "";
+          }
           showScreen($screenRooms);
           subscribeRooms();
-        } else {
-          goToNameScreen();
-        }
+          subscribeFriendsAndRequests();
+        }).catch(function (err) {
+          console.error(err);
+          showError("ユーザー情報の取得に失敗しました。通信環境をご確認ください。");
+        });
+      } else {
+        // ログアウト状態。チャット関連の購読を止めてログイン画面に戻す
+        state.myUid = null;
+        state.myName = "";
+        unsubscribeMessages();
+        stopPresence();
+        unsubscribeFriendsAndRequests();
+        if (state.roomsUnsub) { state.roomsUnsub(); state.roomsUnsub = null; }
+        state.currentRoomId = null;
+        goToAuthScreen();
       }
-    });
-    fb.signInAnonymously(fb.auth).catch(function (err) {
-      console.error(err);
-      showError("サーバーへの接続に失敗しました。", { persistent: true, showReload: true });
     });
   }
 
