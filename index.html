@@ -414,9 +414,20 @@
   .reaction-count{ color: var(--text-sub); font-size:11px; }
   .reaction-chip.active .reaction-count{ color: var(--accent); }
 
+<<<<<<< HEAD
   .meta-row{ display:flex; align-items:center; gap:5px; margin-top:3px; }
   .meta{ font-size:11px; color: var(--text-sub); }
   .read-status{ font-size:10.5px; color: var(--accent); }
+=======
+<<<<<<< HEAD
+  .meta-row{ display:flex; align-items:center; gap:5px; margin-top:3px; }
+  .meta{ font-size:11px; color: var(--text-sub); }
+  .read-status{ font-size:10.5px; color: var(--accent); }
+=======
+  .meta{ font-size:11px; color: var(--text-sub); margin-top:3px; }
+  .read-status{ font-size:10.5px; color: var(--accent); margin-top:1px; }
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
+>>>>>>> 6c05bf01191ef016e9d3659f362336bb22856ffe
   .sender-name{ font-size:12px; color: var(--text-sub); margin: 0 0 2px 2px; }
 
   .composer{ flex-shrink:0; border-top: 1px solid var(--border); padding: 10px 12px; background: var(--panel); }
@@ -931,7 +942,15 @@
     rooms: [],            // Firestoreから取得した部屋一覧（リアルタイム同期）
     currentRoomId: null,
     currentMessages: [],  // 現在の部屋のメッセージ（リアルタイム同期）
+<<<<<<< HEAD
     othersReadReceipts: [], // 既読判定用: 自分以外の既読時刻 [{uid, lastReadAtMs}]
+=======
+<<<<<<< HEAD
+    othersReadReceipts: [], // 既読判定用: 自分以外の既読時刻 [{uid, lastReadAtMs}]
+=======
+    othersPresence: [],   // 既読判定用: 自分以外の在室情報 [{uid, lastSeenMs}]
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
+>>>>>>> 6c05bf01191ef016e9d3659f362336bb22856ffe
     roomsUnsub: null,
     messagesUnsub: null
   };
@@ -1659,11 +1678,27 @@
     if (!m.deleted) {
       wrap.appendChild(buildReactionBar(m));
     }
+<<<<<<< HEAD
     wrap.appendChild(metaRow);
+=======
+<<<<<<< HEAD
+    wrap.appendChild(metaRow);
+=======
+    wrap.appendChild(meta);
+    if (isMe && !m.deleted && m.createdAt) {
+      var readEl = buildReadStatus(m);
+      if (readEl) wrap.appendChild(readEl);
+    }
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
+>>>>>>> 6c05bf01191ef016e9d3659f362336bb22856ffe
     row.appendChild(wrap);
     return row;
   }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6c05bf01191ef016e9d3659f362336bb22856ffe
   // 既読表示: 自分が送ったメッセージについて、相手が「最後にこの部屋を
   // 開いた時刻（readReceipts）」がメッセージ送信時刻より新しければ既読とする
   function buildReadStatus(m) {
@@ -1675,6 +1710,22 @@
     if (readCount === 0) return null;
 
     var el = document.createElement("span");
+<<<<<<< HEAD
+=======
+=======
+  // 既読表示: 自分が送ったメッセージについて、メッセージ送信後に
+  // 在室確認(presence)があった人数を「既読」としてカウントする
+  function buildReadStatus(m) {
+    var msgTimeMs = m.createdAt.getTime();
+    var readCount = 0;
+    (state.othersPresence || []).forEach(function (p) {
+      if (p.lastSeenMs > msgTimeMs) readCount += 1;
+    });
+    if (readCount === 0) return null;
+
+    var el = document.createElement("div");
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
+>>>>>>> 6c05bf01191ef016e9d3659f362336bb22856ffe
     el.className = "read-status";
     el.textContent = readCount === 1 ? "既読" : "既読 " + readCount + "人";
     return el;
