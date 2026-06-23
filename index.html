@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja" data-theme="light">
 <head>
 <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   に設定済みです（riku-chat-c3b3d プロジェクト）。別のプロジェクトに切り替える
   場合のみ、その値を書き換えてください。
   ===========================================================================
- 
+
   セキュリティに関するメモ
   - apiKey 等の Firebase 設定値はブラウザに公開されることを前提とした値です
     （秘密鍵ではありません）。実際のアクセス制御は Firestore セキュリティ
@@ -33,7 +33,7 @@
    配色は :root と [data-theme="..."] の中の CSS変数で管理しているため、
    テーマを増やす場合もこのファイルの変更だけで対応できます。
    =========================================================================== */
- 
+
 :root{
     --bg: #f4f5f7;
     --panel: #ffffff;
@@ -66,7 +66,7 @@
     --danger: #f87171;
     --danger-weak: #34201f;
   }
- 
+
   /* ブルー系テーマ: 全体を青みがかった配色に。吹き出しは藍色系 */
   [data-theme="blue"]{
     --bg: #eef4fb;
@@ -83,7 +83,7 @@
     --danger: #d6383b;
     --danger-weak: #fbe3e3;
   }
- 
+
   /* グリーン系テーマ: 落ち着いた緑を基調にした配色 */
   [data-theme="green"]{
     --bg: #eef6ef;
@@ -100,7 +100,7 @@
     --danger: #d6383b;
     --danger-weak: #fbe3e3;
   }
- 
+
   /* ピンク系テーマ: やわらかい桃色を基調にした配色 */
   [data-theme="pink"]{
     --bg: #fdf0f5;
@@ -117,7 +117,7 @@
     --danger: #d6383b;
     --danger-weak: #fbe3e3;
   }
- 
+
   /* オレンジ系テーマ: 暖かみのある橙色を基調にした配色 */
   [data-theme="orange"]{
     --bg: #fdf3ec;
@@ -134,7 +134,7 @@
     --danger: #d6383b;
     --danger-weak: #fbe3e3;
   }
- 
+
   *{ box-sizing: border-box; }
   html, body{
     margin:0; padding:0; height:100%;
@@ -149,7 +149,7 @@
   html[data-theme="pink"]{ color-scheme: light; }
   html[data-theme="orange"]{ color-scheme: light; }
   button{ font-family: inherit; }
- 
+
   .app{
     display:flex;
     flex-direction:column;
@@ -161,7 +161,7 @@
     border-right: 1px solid var(--border);
     position: relative;
   }
- 
+
   .screen{
     flex:1;
     display:flex;
@@ -169,7 +169,7 @@
     min-height:0;
   }
   .screen.hidden{ display:none; }
- 
+
   .center-screen{
     flex:1;
     display:flex;
@@ -210,7 +210,7 @@
   .field .error-text{ font-size:12px; color: var(--danger); margin-top:5px; display:none; }
   .field.has-error input{ border-color: var(--danger); }
   .field.has-error .error-text{ display:block; }
- 
+
   .btn-primary{
     width:100%; padding: 12px; border-radius:10px; border:none;
     background: var(--accent); color:#fff; font-size:14.5px; font-weight:600;
@@ -219,19 +219,19 @@
   }
   .btn-primary:disabled{ opacity:.45; cursor:not-allowed; }
   .btn-primary:not(:disabled):active{ transform: scale(.985); }
- 
+
   .btn-secondary{
     width:100%; padding: 12px; border-radius:10px; border:1px solid var(--border);
     background: transparent; color: var(--text); font-size:14.5px; font-weight:600;
     cursor:pointer; margin-top:8px; transition: background .15s ease;
   }
   .btn-secondary:hover{ background: var(--bg); }
- 
+
   .room-list-wrap{ flex:1; display:flex; flex-direction:column; min-height:0; }
   .room-list-header{ padding: 18px 20px 8px; flex-shrink:0; }
   .room-list-header h1{ font-size:19px; font-weight:600; margin:0 0 2px; }
   .room-list-header .sub{ font-size:13px; color: var(--text-sub); }
- 
+
   .room-list{ flex:1; overflow-y:auto; padding: 8px 16px 16px; }
   .room-item{
     display:flex; align-items:center; gap:12px; padding: 12px 14px;
@@ -253,10 +253,10 @@
     justify-content:center; cursor:pointer; transition: background .15s ease, color .15s ease;
   }
   .room-item .room-delete:hover{ background: var(--danger-weak); color: var(--danger); }
- 
+
   .empty-state{ text-align:center; color: var(--text-sub); font-size:13px; padding: 40px 20px; }
   .loading-state{ text-align:center; color: var(--text-sub); font-size:13px; padding: 40px 20px; display:flex; flex-direction:column; align-items:center; gap:10px; }
- 
+
   .room-list-footer{ flex-shrink:0; padding: 12px 16px; border-top:1px solid var(--border); }
   .new-room-btn{
     width:100%; padding: 12px; border-radius:10px; border: 1.5px dashed var(--border);
@@ -265,7 +265,7 @@
     transition: background .15s ease, border-color .15s ease;
   }
   .new-room-btn:hover{ background: var(--accent-weak); border-color: var(--accent); }
- 
+
   /* 「あなたの表示名」カード。部屋名表示と混同しないよう、独立したカードとして見せる */
   .my-name-card{
     display:flex;
@@ -303,7 +303,7 @@
     transition: background .12s ease;
   }
   .my-name-card-edit-btn:hover{ background: var(--accent-weak); }
- 
+
   header{
     height: var(--header-h); flex-shrink:0; display:flex; align-items:center;
     justify-content:space-between; padding: 0 12px 0 8px; border-bottom: 1px solid var(--border); background: var(--panel);
@@ -316,7 +316,7 @@
   .title-block{ min-width:0; }
   .title-block .name{ font-size:15px; font-weight:600; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:180px; }
   .title-block .status{ font-size:12px; color: var(--text-sub); }
- 
+
   .icon-btn{
     background:none; border:none; cursor:pointer; color: var(--text-sub);
     width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center;
@@ -327,27 +327,27 @@
   .icon-btn:disabled{ opacity:.4; cursor:not-allowed; }
   .icon-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset:1px; }
   .header-actions{ display:flex; gap:2px; }
- 
+
   .messages{ flex:1; overflow-y:auto; padding: 16px; display:flex; flex-direction:column; gap: 4px; scroll-behavior:smooth; }
   .msg-row{ display:flex; gap:8px; max-width: 100%; animation: fadeIn .18s ease; }
   @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px); } to{ opacity:1; transform: translateY(0); } }
   .msg-row.me{ justify-content:flex-end; }
   .msg-row.other{ justify-content:flex-start; }
- 
+
   .bubble-wrap{ display:flex; flex-direction:column; max-width: 78%; position:relative; }
   .msg-row.me .bubble-wrap{ align-items:flex-end; }
   .msg-row.other .bubble-wrap{ align-items:flex-start; }
- 
+
   .bubble-line{ display:flex; align-items:center; gap:6px; }
   .msg-row.me .bubble-line{ flex-direction: row-reverse; }
- 
+
   .bubble{ padding: 9px 13px; border-radius: var(--radius); font-size:14.5px; line-height:1.55; word-break: break-word; white-space: pre-wrap; }
   .msg-row.me .bubble{ background: var(--bubble-me); color: var(--bubble-me-text); border-bottom-right-radius:4px; }
   .msg-row.other .bubble{ background: var(--bubble-other); color: var(--bubble-other-text); border-bottom-left-radius:4px; }
   .bubble a{ color: inherit; text-decoration: underline; word-break: break-all; }
   .bubble.deleted{ font-style: italic; opacity:.65; }
   .bubble.pending{ opacity:.6; }
- 
+
   .msg-delete-btn{
     flex-shrink:0; width:24px; height:24px; border-radius:50%; border:none; background: transparent;
     color: var(--text-sub); display:flex; align-items:center; justify-content:center; cursor:pointer;
@@ -356,7 +356,7 @@
   .msg-row:hover .msg-delete-btn{ opacity:1; }
   .msg-delete-btn:hover{ background: var(--danger-weak); color: var(--danger); }
   .msg-delete-btn:focus-visible{ opacity:1; outline:2px solid var(--accent); }
- 
+
   /* スタンプ（リアクション）を付けるボタン（🙂アイコン） */
   .reaction-add-btn{
     flex-shrink:0; width:24px; height:24px; border-radius:50%; border:none; background: transparent;
@@ -366,7 +366,7 @@
   .msg-row:hover .reaction-add-btn{ opacity:1; }
   .reaction-add-btn:hover{ background: var(--bg); }
   .reaction-add-btn:focus-visible{ opacity:1; outline:2px solid var(--accent); }
- 
+
   /* スタンプ選択ピッカー（🙂を押すと出てくる横並びの選択肢） */
   .reaction-picker{
     position:absolute;
@@ -387,7 +387,7 @@
     transition: background .12s ease, transform .1s ease;
   }
   .reaction-picker-btn:hover{ background: var(--bg); transform: scale(1.15); }
- 
+
   /* 付けられたスタンプの集計バッジ（押された絵文字＋人数） */
   .reaction-bar{
     display:flex;
@@ -413,12 +413,12 @@
   }
   .reaction-count{ color: var(--text-sub); font-size:11px; }
   .reaction-chip.active .reaction-count{ color: var(--accent); }
- 
+
   .meta-row{ display:flex; align-items:center; gap:5px; margin-top:3px; }
   .meta{ font-size:11px; color: var(--text-sub); }
   .read-status{ font-size:10.5px; color: var(--accent); }
   .sender-name{ font-size:12px; color: var(--text-sub); margin: 0 0 2px 2px; }
- 
+
   .composer{ flex-shrink:0; border-top: 1px solid var(--border); padding: 10px 12px; background: var(--panel); }
   .composer-inner{
     display:flex; align-items:flex-end; gap:8px; background: var(--bg);
@@ -432,7 +432,7 @@
   }
   #msg-input::placeholder{ color: var(--text-sub); }
   #msg-input:disabled{ opacity:.5; }
- 
+
   .send-btn{
     flex-shrink:0; width:34px; height:34px; border-radius:50%; border:none; cursor:pointer;
     background: var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;
@@ -441,13 +441,13 @@
   .send-btn:disabled{ opacity:.4; cursor: not-allowed; }
   .send-btn:not(:disabled):active{ transform: scale(.92); }
   .send-btn:focus-visible{ outline: 2px solid var(--accent); outline-offset:2px; }
- 
+
   .composer-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:6px; padding: 0 6px; }
   .composer-foot-left{ display:flex; align-items:center; gap:10px; min-width:0; }
   .hint{ font-size:11px; color: var(--text-sub); white-space:nowrap; }
   .char-count{ font-size:11px; color: var(--text-sub); flex-shrink:0; }
   .char-count.warn{ color: var(--danger); }
- 
+
   /* お題ガチャボタン: 控えめな見た目（枠線なし、薄い文字色） */
   .topic-gacha-btn{
     border:none;
@@ -461,7 +461,7 @@
     transition: background .12s ease, color .12s ease;
   }
   .topic-gacha-btn:hover{ background: var(--bg); color: var(--accent); }
- 
+
   /* お題ガチャの結果バナー */
   .topic-banner{
     display:flex;
@@ -489,7 +489,7 @@
     padding: 0 4px;
   }
   .topic-banner-close:hover{ color: var(--text); }
- 
+
   .banner{
     font-size:13px; padding:8px 14px; background: #fef2f2; color: #b91c1c;
     border-bottom:1px solid #fecaca; display:none; align-items:center; gap:8px; flex-shrink:0;
@@ -509,14 +509,14 @@
     cursor:pointer;
   }
   .banner-reload-btn.hidden{ display:none; }
- 
+
   .messages::-webkit-scrollbar{ width:8px; }
   .messages::-webkit-scrollbar-thumb{ background: var(--border); border-radius:4px; }
   .room-list::-webkit-scrollbar{ width:8px; }
   .room-list::-webkit-scrollbar-thumb{ background: var(--border); border-radius:4px; }
- 
+
   .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip: rect(0,0,0,0); white-space:nowrap; }
- 
+
   .modal-overlay{
     position:absolute; inset:0; background: rgba(0,0,0,.4); display:flex;
     align-items:center; justify-content:center; padding: 24px; z-index: 50;
@@ -531,16 +531,16 @@
     cursor:pointer; border:1px solid var(--border); background:transparent; color: var(--text);
   }
   .modal-actions button.danger{ background: var(--danger); border-color: var(--danger); color:#fff; }
- 
+
   .spinner{
     width:18px; height:18px; border-radius:50%;
     border: 2.5px solid var(--border); border-top-color: var(--accent);
     animation: spin .7s linear infinite;
   }
   @keyframes spin{ to{ transform: rotate(360deg); } }
- 
+
   @media (max-width: 480px){ .app{ max-width:100%; border-left:none; border-right:none; } }
- 
+
   /* ホーム画面系用フローティングのテーマ切り替えボタン */
   .floating-theme-btn{
     position:absolute;
@@ -552,7 +552,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.08);
   }
   .floating-theme-btn.hidden{ display:none; }
- 
+
   /* テーマ選択メニュー（共通。JSが開いたボタンの近くに位置を設定する） */
   .theme-menu{
     position:absolute;
@@ -599,9 +599,9 @@
 </style>
 </head>
 <body>
- 
+
 <div class="app" data-theme="light" id="app-root">
- 
+
   <!-- ホーム画面系（名前設定・部屋選択・部屋作成・入室）で表示するフローティングのテーマ切り替えボタン -->
   <button class="icon-btn floating-theme-btn" id="theme-toggle-floating" aria-label="テーマを選ぶ" title="テーマを選ぶ">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -610,7 +610,7 @@
       <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.688-1.688h1.972c3.051 0 5.555-2.503 5.555-5.554C21.988 6.012 17.65 2 12 2z"></path>
     </svg>
   </button>
- 
+
   <!-- テーマ選択メニュー（共通。開いたボタンの近くにJSで配置） -->
   <div class="theme-menu hidden" id="theme-menu" role="menu" aria-label="テーマを選ぶ">
     <button type="button" class="theme-menu-item" data-theme-value="light" role="menuitem">
@@ -632,12 +632,12 @@
       <span class="theme-swatch theme-swatch-orange" aria-hidden="true"></span>オレンジ
     </button>
   </div>
- 
+
   <div class="banner" id="error-banner" role="alert">
     <span id="error-banner-text"></span>
     <button type="button" class="banner-reload-btn hidden" id="banner-reload-btn">再読み込み</button>
   </div>
- 
+
   <!-- ============ 起動中画面（Firebase接続待ち） ============ -->
   <section class="screen center-screen" id="screen-loading">
     <div class="loading-state">
@@ -645,7 +645,7 @@
       <div>接続しています…</div>
     </div>
   </section>
- 
+
   <!-- ============ 画面1: 名前設定 ============ -->
   <section class="screen hidden center-screen" id="screen-name">
     <div class="form-card">
@@ -667,7 +667,7 @@
       </form>
     </div>
   </section>
- 
+
   <!-- ============ 画面2: 部屋選択 ============ -->
   <section class="screen hidden" id="screen-rooms">
     <div class="room-list-wrap">
@@ -697,7 +697,7 @@
       </div>
     </div>
   </section>
- 
+
   <!-- ============ 画面3: 新規部屋作成 ============ -->
   <section class="screen hidden center-screen" id="screen-create-room">
     <div class="form-card">
@@ -725,7 +725,7 @@
       </form>
     </div>
   </section>
- 
+
   <!-- ============ 画面4: 入室パスコード確認 ============ -->
   <section class="screen hidden center-screen" id="screen-join-passcode">
     <div class="form-card">
@@ -748,7 +748,7 @@
       </form>
     </div>
   </section>
- 
+
   <!-- ============ 画面5: チャット ============ -->
   <section class="screen hidden" id="screen-chat">
     <header>
@@ -780,16 +780,16 @@
         </button>
       </div>
     </header>
- 
+
     <!-- お題ガチャの結果を一時的に表示するバナー -->
     <div class="topic-banner hidden" id="topic-banner">
       <span class="topic-banner-dice" aria-hidden="true">🎲</span>
       <span id="topic-banner-text"></span>
       <button type="button" class="topic-banner-close" id="topic-banner-close" aria-label="閉じる">×</button>
     </div>
- 
+
     <div class="messages" id="messages" role="log" aria-live="polite" aria-label="チャットメッセージ一覧"></div>
- 
+
     <div class="composer">
       <div class="composer-inner">
         <textarea
@@ -814,7 +814,7 @@
       </div>
     </div>
   </section>
- 
+
   <div class="modal-overlay hidden" id="confirm-modal">
     <div class="modal-box">
       <h2 id="confirm-modal-title">確認</h2>
@@ -825,9 +825,9 @@
       </div>
     </div>
   </div>
- 
+
 </div>
- 
+
 <!-- メインスクリプト（Firebase連携・チャットロジック）。import文を使うため type="module" -->
 <script type="module">
 /* ===========================================================================
@@ -836,7 +836,7 @@
    このファイルは <script type="module"> として index.html から読み込まれます
    （import文を使うため module 指定が必須です）。
    =========================================================================== */
- 
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import {
     getAuth,
@@ -857,7 +857,7 @@
     orderBy,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
- 
+
   /* =========================================================
      Firebaseプロジェクトの設定値
      ========================================================= */
@@ -869,11 +869,11 @@
     messagingSenderId: "401508615370",
     appId: "1:401508615370:web:a596b4e945d6c4ec9f6033"
   };
- 
+
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
   const db = getFirestore(firebaseApp);
- 
+
   // このファイル内の後半部分（メインロジック）から使えるように window に橋渡しする
   window.__firebase = {
     auth, db,
@@ -882,10 +882,10 @@
     onSnapshot, getDocs, query, orderBy, serverTimestamp
   };
   window.dispatchEvent(new Event("firebase-ready"));
- 
+
 (function () {
   "use strict";
- 
+
   /* =========================================================
      設定値
      ========================================================= */
@@ -896,7 +896,7 @@
   var RATE_LIMIT_MS = 600;
   var NAME_STORAGE_KEY = "webchat_my_name";
   var REACTION_EMOJIS = ["👍", "❤️", "😂", "😢", "😮"]; // メッセージに付けられるスタンプの種類
- 
+
   // お題ガチャで表示する話題の一覧（会話のきっかけ用）
   var GACHA_TOPICS = [
     "最近見た映画は？",
@@ -920,7 +920,7 @@
     "今年やりたいことは？",
     "おすすめのお店はある？"
   ];
- 
+
   /* =========================================================
      状態管理
      ========================================================= */
@@ -937,7 +937,7 @@
   };
   var lastSendTime = 0;
   var fb = null; // window.__firebase が入る
- 
+
   /* =========================================================
      DOM参照
      ========================================================= */
@@ -945,23 +945,23 @@
   var $banner = document.getElementById("error-banner");
   var $bannerText = document.getElementById("error-banner-text");
   var $bannerReloadBtn = document.getElementById("banner-reload-btn");
- 
+
   var $screenLoading = document.getElementById("screen-loading");
   var $screenName = document.getElementById("screen-name");
   var $screenRooms = document.getElementById("screen-rooms");
   var $screenCreateRoom = document.getElementById("screen-create-room");
   var $screenJoinPasscode = document.getElementById("screen-join-passcode");
   var $screenChat = document.getElementById("screen-chat");
- 
+
   var $nameForm = document.getElementById("name-form");
   var $nameInput = document.getElementById("name-input");
   var $nameField = document.getElementById("name-field");
- 
+
   var $meChipName = document.getElementById("me-chip-name");
   var $changeNameBtn = document.getElementById("change-name-btn");
   var $roomList = document.getElementById("room-list");
   var $newRoomBtn = document.getElementById("new-room-btn");
- 
+
   var $createRoomForm = document.getElementById("create-room-form");
   var $roomNameInput = document.getElementById("room-name-input");
   var $roomNameField = document.getElementById("room-name-field");
@@ -969,14 +969,14 @@
   var $roomPassField = document.getElementById("room-pass-field");
   var $createRoomCancelBtn = document.getElementById("create-room-cancel-btn");
   var $createRoomSubmitBtn = document.getElementById("create-room-submit-btn");
- 
+
   var $joinForm = document.getElementById("join-form");
   var $joinRoomTitle = document.getElementById("join-room-title");
   var $joinPassInput = document.getElementById("join-pass-input");
   var $joinPassField = document.getElementById("join-pass-field");
   var $joinCancelBtn = document.getElementById("join-cancel-btn");
   var $joinSubmitBtn = document.getElementById("join-submit-btn");
- 
+
   var $messages = document.getElementById("messages");
   var $input = document.getElementById("msg-input");
   var $sendBtn = document.getElementById("send-btn");
@@ -992,15 +992,15 @@
   var $roomAvatar = document.getElementById("room-avatar");
   var $roomTitleText = document.getElementById("room-title-text");
   var $roomMemberCount = document.getElementById("room-member-count");
- 
+
   var $confirmModal = document.getElementById("confirm-modal");
   var $confirmModalTitle = document.getElementById("confirm-modal-title");
   var $confirmModalText = document.getElementById("confirm-modal-text");
   var $confirmModalOk = document.getElementById("confirm-modal-ok");
   var $confirmModalCancel = document.getElementById("confirm-modal-cancel");
- 
+
   var pendingRoomIdToJoin = null;
- 
+
   /* =========================================================
      共通ユーティリティ
      ========================================================= */
@@ -1009,7 +1009,7 @@
     $bannerText.textContent = message;
     $banner.classList.add("show");
     $bannerReloadBtn.classList.toggle("hidden", !opts.showReload);
- 
+
     window.clearTimeout(showError._t);
     if (!opts.persistent) {
       showError._t = window.setTimeout(function () { $banner.classList.remove("show"); }, 4500);
@@ -1020,7 +1020,7 @@
     $banner.classList.remove("show");
   }
   $bannerReloadBtn.addEventListener("click", function () { window.location.reload(); });
- 
+
   function showScreen(el) {
     [$screenLoading, $screenName, $screenRooms, $screenCreateRoom, $screenJoinPasscode, $screenChat].forEach(function (s) {
       s.classList.add("hidden");
@@ -1030,7 +1030,7 @@
     // フローティングボタンはホーム画面系でのみ表示する
     $themeBtnFloating.classList.toggle("hidden", el === $screenChat);
   }
- 
+
   function sanitizeText(raw, maxLen) {
     if (typeof raw !== "string") return "";
     var cleaned = raw.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, "");
@@ -1045,7 +1045,7 @@
     if (cleaned.length > maxLen) cleaned = cleaned.slice(0, maxLen);
     return cleaned;
   }
- 
+
   var URL_PATTERN = /(https?:\/\/[^\s<>"']+)/g;
   function renderSafeText(container, text) {
     var lastIndex = 0;
@@ -1065,16 +1065,16 @@
     }
     if (lastIndex < text.length) container.appendChild(document.createTextNode(text.slice(lastIndex)));
   }
- 
+
   function formatTime(date) {
     if (!date) return "";
     var h = String(date.getHours()).padStart(2, "0");
     var m = String(date.getMinutes()).padStart(2, "0");
     return h + ":" + m;
   }
- 
+
   function setFieldError(fieldEl, hasError) { fieldEl.classList.toggle("has-error", !!hasError); }
- 
+
   // 合言葉のハッシュ化（SHA-256, 16進文字列）。Web Crypto APIを利用（HTTPS環境で利用可能）
   function hashPasscode(text) {
     var enc = new TextEncoder();
@@ -1088,12 +1088,12 @@
       return hex;
     });
   }
- 
+
   function setBusy(btn, busy, busyLabel, normalLabel) {
     btn.disabled = busy;
     btn.textContent = busy ? busyLabel : normalLabel;
   }
- 
+
   /* =========================================================
      確認モーダル（汎用）
      ========================================================= */
@@ -1112,7 +1112,7 @@
     if (typeof cb === "function") cb();
   });
   $confirmModal.addEventListener("click", function (e) { if (e.target === $confirmModal) closeConfirmModal(); });
- 
+
   /* =========================================================
      名前設定（localStorageに保存。Firestoreには送らない）
      ========================================================= */
@@ -1124,14 +1124,14 @@
     try { localStorage.setItem(NAME_STORAGE_KEY, name); }
     catch (e) { /* プライベートモード等で失敗しても致命的ではないため無視 */ }
   }
- 
+
   function goToNameScreen() {
     $nameInput.value = state.myName || loadSavedName() || "";
     setFieldError($nameField, false);
     showScreen($screenName);
     window.setTimeout(function () { $nameInput.focus(); }, 0);
   }
- 
+
   $nameForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var name = sanitizeText($nameInput.value, MAX_NAME_LENGTH);
@@ -1146,22 +1146,22 @@
     showScreen($screenRooms);
     subscribeRooms();
   });
- 
+
   $changeNameBtn.addEventListener("click", function () { goToNameScreen(); });
- 
+
   /* =========================================================
      画面2: 部屋選択（Firestoreの "rooms" コレクションをリアルタイム購読）
      ========================================================= */
   function subscribeRooms() {
     $meChipName.textContent = state.myName;
     if (state.roomsUnsub) { state.roomsUnsub(); state.roomsUnsub = null; }
- 
+
     $roomList.innerHTML = "";
     var loading = document.createElement("div");
     loading.className = "loading-state";
     loading.innerHTML = '<div class="spinner" aria-hidden="true"></div><div>部屋一覧を読み込み中…</div>';
     $roomList.appendChild(loading);
- 
+
     var roomsCol = fb.collection(fb.db, "rooms");
     var q = fb.query(roomsCol, fb.orderBy("createdAt", "desc"));
     state.roomsUnsub = fb.onSnapshot(q, function (snapshot) {
@@ -1181,7 +1181,7 @@
       showError("部屋一覧の取得に失敗しました。通信環境をご確認ください。");
     });
   }
- 
+
   function renderRoomList() {
     $roomList.innerHTML = "";
     if (state.rooms.length === 0) {
@@ -1196,19 +1196,19 @@
       item.className = "room-item";
       item.setAttribute("role", "button");
       item.setAttribute("tabindex", "0");
- 
+
       var icon = document.createElement("div");
       icon.className = "room-icon";
       icon.setAttribute("aria-hidden", "true");
       icon.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>';
- 
+
       var info = document.createElement("div");
       info.className = "room-info";
- 
+
       var nameEl = document.createElement("div");
       nameEl.className = "room-name";
       nameEl.textContent = room.name;
- 
+
       var metaEl = document.createElement("div");
       metaEl.className = "room-meta";
       var lockTag = document.createElement("span");
@@ -1220,7 +1220,7 @@
       metaEl.appendChild(lockTag);
       info.appendChild(nameEl);
       info.appendChild(metaEl);
- 
+
       var deleteBtn = document.createElement("button");
       deleteBtn.className = "room-delete";
       deleteBtn.setAttribute("aria-label", room.name + " を削除");
@@ -1230,21 +1230,21 @@
         e.stopPropagation();
         confirmDeleteRoom(room.id);
       });
- 
+
       item.appendChild(icon);
       item.appendChild(info);
       item.appendChild(deleteBtn);
- 
+
       function openJoin() { startJoinFlow(room.id); }
       item.addEventListener("click", openJoin);
       item.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openJoin(); }
       });
- 
+
       $roomList.appendChild(item);
     });
   }
- 
+
   function confirmDeleteRoom(roomId) {
     var room = state.rooms.find(function (r) { return r.id === roomId; });
     if (!room) return;
@@ -1254,7 +1254,7 @@
       function () { deleteRoomFromFirestore(roomId); }
     );
   }
- 
+
   function deleteRoomFromFirestore(roomId) {
     var messagesCol = fb.collection(fb.db, "rooms", roomId, "messages");
     var presenceCol = fb.collection(fb.db, "rooms", roomId, "presence");
@@ -1288,7 +1288,7 @@
       showDeleteError(err);
     });
   }
- 
+
   // 権限エラー（Firestoreセキュリティルールによる拒否）の場合は、
   // 原因が分かりやすいメッセージを表示する
   function showDeleteError(err) {
@@ -1298,7 +1298,7 @@
       showError("部屋の削除に失敗しました。通信環境をご確認ください。");
     }
   }
- 
+
   $newRoomBtn.addEventListener("click", function () {
     $roomNameInput.value = "";
     $roomPassInput.value = "";
@@ -1307,7 +1307,7 @@
     showScreen($screenCreateRoom);
     window.setTimeout(function () { $roomNameInput.focus(); }, 0);
   });
- 
+
   /* =========================================================
      画面3: 新規部屋作成
      ========================================================= */
@@ -1315,16 +1315,16 @@
     e.preventDefault();
     var roomName = sanitizeText($roomNameInput.value, MAX_ROOM_NAME_LENGTH);
     var roomPass = sanitizeText($roomPassInput.value, MAX_PASS_LENGTH);
- 
+
     var hasError = false;
     if (roomName.length === 0) { setFieldError($roomNameField, true); hasError = true; }
     else { setFieldError($roomNameField, false); }
     if (roomPass.length === 0) { setFieldError($roomPassField, true); hasError = true; }
     else { setFieldError($roomPassField, false); }
     if (hasError) return;
- 
+
     setBusy($createRoomSubmitBtn, true, "作成中…", "部屋を作成");
- 
+
     hashPasscode(roomPass).then(function (passHash) {
       var roomsCol = fb.collection(fb.db, "rooms");
       return fb.addDoc(roomsCol, {
@@ -1342,9 +1342,9 @@
       showError("部屋の作成に失敗しました。通信環境をご確認ください。");
     });
   });
- 
+
   $createRoomCancelBtn.addEventListener("click", function () { showScreen($screenRooms); });
- 
+
   /* =========================================================
      画面4: 入室パスコード確認
      ========================================================= */
@@ -1358,15 +1358,15 @@
     showScreen($screenJoinPasscode);
     window.setTimeout(function () { $joinPassInput.focus(); }, 0);
   }
- 
+
   $joinForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var room = state.rooms.find(function (r) { return r.id === pendingRoomIdToJoin; });
     if (!room) { showScreen($screenRooms); return; }
- 
+
     var inputPass = sanitizeText($joinPassInput.value, MAX_PASS_LENGTH);
     setBusy($joinSubmitBtn, true, "確認中…", "入室する");
- 
+
     hashPasscode(inputPass).then(function (hash) {
       setBusy($joinSubmitBtn, false, "確認中…", "入室する");
       if (hash !== room.passHash) {
@@ -1379,12 +1379,12 @@
       enterRoom(room.id, room.name);
     });
   });
- 
+
   $joinCancelBtn.addEventListener("click", function () {
     pendingRoomIdToJoin = null;
     showScreen($screenRooms);
   });
- 
+
   /* =========================================================
      画面5: チャット（Firestoreの rooms/{roomId}/messages をリアルタイム購読）
      ========================================================= */
@@ -1394,7 +1394,7 @@
     $roomTitleText.textContent = roomName;
     $roomAvatar.textContent = roomName.charAt(0);
     $roomMemberCount.textContent = "オンライン: -人";
- 
+
     showScreen($screenChat);
     updateCharCount();
     updateSendButtonState();
@@ -1402,7 +1402,7 @@
     startPresence(roomId);
     window.setTimeout(function () { $input.focus(); }, 0);
   }
- 
+
   function subscribeMessages(roomId) {
     unsubscribeMessages();
     $messages.innerHTML = "";
@@ -1410,7 +1410,7 @@
     loading.className = "loading-state";
     loading.innerHTML = '<div class="spinner" aria-hidden="true"></div><div>メッセージを読み込み中…</div>';
     $messages.appendChild(loading);
- 
+
     var messagesCol = fb.collection(fb.db, "rooms", roomId, "messages");
     var q = fb.query(messagesCol, fb.orderBy("createdAt", "asc"));
     state.messagesUnsub = fb.onSnapshot(q, function (snapshot) {
@@ -1433,12 +1433,12 @@
       showError("メッセージの取得に失敗しました。通信環境をご確認ください。");
     });
   }
- 
+
   function unsubscribeMessages() {
     if (state.messagesUnsub) { state.messagesUnsub(); state.messagesUnsub = null; }
     state.currentMessages = [];
   }
- 
+
   /* =========================================================
      プレゼンス機能（簡易オンライン人数表示）
      rooms/{roomId}/presence/{uid} に自分の在室情報を書き込み、
@@ -1449,13 +1449,13 @@
   var PRESENCE_STALE_MS = 45000;       // 45秒更新が無ければオフライン扱い
   var presenceHeartbeatTimer = null;
   var presenceUnsub = null;
- 
+
   function startPresence(roomId) {
     stopPresence();
     if (!state.myUid) return;
- 
+
     var presenceCol = fb.collection(fb.db, "rooms", roomId, "presence");
- 
+
     // 入室時に一度だけ、同じ部屋に同名の人がいないか確認し、
     // 重複していれば「name(2)」のように連番を付けた表示名を使う
     fb.getDocs(presenceCol).then(function (snapshot) {
@@ -1481,7 +1481,7 @@
       beginPresenceHeartbeatAndSubscription(roomId);
     });
   }
- 
+
   // 既に使われている名前一覧の中で重複しないよう、必要なら "(2)" のように連番を付ける
   function resolveUniqueName(baseName, usedNames) {
     if (usedNames.indexOf(baseName) === -1) return baseName;
@@ -1491,7 +1491,7 @@
     }
     return baseName + "(" + n + ")";
   }
- 
+
   function beginPresenceHeartbeatAndSubscription(roomId) {
     var presenceRef = fb.doc(fb.db, "rooms", roomId, "presence", state.myUid);
     var writeHeartbeat = function () {
@@ -1505,7 +1505,7 @@
     };
     writeHeartbeat();
     presenceHeartbeatTimer = window.setInterval(writeHeartbeat, PRESENCE_HEARTBEAT_MS);
- 
+
     var presenceCol = fb.collection(fb.db, "rooms", roomId, "presence");
     presenceUnsub = fb.onSnapshot(presenceCol, function (snapshot) {
       var now = Date.now();
@@ -1520,20 +1520,20 @@
     }, function (err) {
       console.error("presence subscribe failed", err);
     });
- 
+
     // タブを閉じる/離脱する際にできるだけ在室情報を消す（成功は保証されない）
     window.addEventListener("beforeunload", removeOwnPresenceOnce);
- 
+
     // 既読機能はpresenceとは別の仕組みで管理する（退出しても既読が消えないようにするため）
     startReadReceipts(roomId);
   }
- 
+
   function removeOwnPresenceOnce() {
     if (!state.currentRoomId || !state.myUid) return;
     var presenceRef = fb.doc(fb.db, "rooms", state.currentRoomId, "presence", state.myUid);
     fb.deleteDoc(presenceRef).catch(function () { /* 離脱時の失敗は無視 */ });
   }
- 
+
   function stopPresence() {
     if (presenceHeartbeatTimer) { window.clearInterval(presenceHeartbeatTimer); presenceHeartbeatTimer = null; }
     if (presenceUnsub) { presenceUnsub(); presenceUnsub = null; }
@@ -1541,7 +1541,7 @@
     removeOwnPresenceOnce();
     stopReadReceipts();
   }
- 
+
   /* =========================================================
      既読機能（readReceipts）
      rooms/{roomId}/readReceipts/{uid} に「最後にこの部屋を開いた時刻」を
@@ -1551,16 +1551,16 @@
      影響は最小限になるよう設計している。
      ========================================================= */
   var readReceiptsUnsub = null;
- 
+
   function startReadReceipts(roomId) {
     if (!state.myUid) return;
- 
+
     // 入室時に1回だけ、自分の既読時刻を更新する
     var myReceiptRef = fb.doc(fb.db, "rooms", roomId, "readReceipts", state.myUid);
     fb.setDoc(myReceiptRef, { lastReadAt: fb.serverTimestamp() }).catch(function (err) {
       console.error("read receipt update failed", err);
     });
- 
+
     // 他の参加者の既読時刻をリアルタイムに購読し、既読表示の再計算に使う
     var receiptsCol = fb.collection(fb.db, "rooms", roomId, "readReceipts");
     readReceiptsUnsub = fb.onSnapshot(receiptsCol, function (snapshot) {
@@ -1577,12 +1577,12 @@
       console.error("read receipts subscribe failed", err);
     });
   }
- 
+
   function stopReadReceipts() {
     if (readReceiptsUnsub) { readReceiptsUnsub(); readReceiptsUnsub = null; }
     state.othersReadReceipts = [];
   }
- 
+
   function renderAllMessages() {
     $messages.innerHTML = "";
     state.currentMessages.forEach(function (m) {
@@ -1590,26 +1590,26 @@
     });
     scrollToBottom();
   }
- 
+
   function buildMessageRowElement(m) {
     var isMe = m.uid === state.myUid;
     var row = document.createElement("div");
     row.className = "msg-row " + (isMe ? "me" : "other");
     row.dataset.id = m.id;
- 
+
     var wrap = document.createElement("div");
     wrap.className = "bubble-wrap";
- 
+
     if (!isMe) {
       var nameEl = document.createElement("div");
       nameEl.className = "sender-name";
       nameEl.textContent = m.name; // textContent でXSS対策
       wrap.appendChild(nameEl);
     }
- 
+
     var line = document.createElement("div");
     line.className = "bubble-line";
- 
+
     var bubble = document.createElement("div");
     bubble.className = "bubble" + (m.deleted ? " deleted" : "");
     if (m.deleted) {
@@ -1618,7 +1618,7 @@
       renderSafeText(bubble, m.text);
     }
     line.appendChild(bubble);
- 
+
     if (isMe && !m.deleted) {
       var delBtn = document.createElement("button");
       delBtn.className = "msg-delete-btn";
@@ -1628,7 +1628,7 @@
       delBtn.addEventListener("click", function () { deleteMessage(m.id); });
       line.appendChild(delBtn);
     }
- 
+
     if (!m.deleted) {
       var reactionToggleBtn = document.createElement("button");
       reactionToggleBtn.className = "reaction-add-btn";
@@ -1641,20 +1641,20 @@
       });
       line.appendChild(reactionToggleBtn);
     }
- 
+
     var metaRow = document.createElement("div");
     metaRow.className = "meta-row";
- 
+
     var timeEl = document.createElement("span");
     timeEl.className = "meta";
     timeEl.textContent = formatTime(m.createdAt);
     metaRow.appendChild(timeEl);
- 
+
     if (isMe && !m.deleted && m.createdAt) {
       var readEl = buildReadStatus(m);
       if (readEl) metaRow.appendChild(readEl);
     }
- 
+
     wrap.appendChild(line);
     if (!m.deleted) {
       wrap.appendChild(buildReactionBar(m));
@@ -1663,7 +1663,7 @@
     row.appendChild(wrap);
     return row;
   }
- 
+
   // 既読表示: 自分が送ったメッセージについて、相手が「最後にこの部屋を
   // 開いた時刻（readReceipts）」がメッセージ送信時刻より新しければ既読とする
   function buildReadStatus(m) {
@@ -1673,44 +1673,44 @@
       if (r.lastReadAtMs > msgTimeMs) readCount += 1;
     });
     if (readCount === 0) return null;
- 
+
     var el = document.createElement("span");
     el.className = "read-status";
     el.textContent = readCount === 1 ? "既読" : "既読 " + readCount + "人";
     return el;
   }
- 
+
   // すでに押されているリアクションを集計バッジとして表示する行
   function buildReactionBar(m) {
     var bar = document.createElement("div");
     bar.className = "reaction-bar";
     var reactions = m.reactions || {};
- 
+
     REACTION_EMOJIS.forEach(function (emoji) {
       var uids = reactions[emoji] || [];
       if (uids.length === 0) return; // 誰も押していない絵文字は表示しない
       var pressedByMe = uids.indexOf(state.myUid) !== -1;
- 
+
       var chip = document.createElement("button");
       chip.className = "reaction-chip" + (pressedByMe ? " active" : "");
       chip.setAttribute("aria-label", emoji + " " + uids.length + "件");
       chip.title = pressedByMe ? "自分も含めて" + uids.length + "人が反応" : uids.length + "人が反応";
- 
+
       var emojiSpan = document.createElement("span");
       emojiSpan.textContent = emoji;
       var countSpan = document.createElement("span");
       countSpan.className = "reaction-count";
       countSpan.textContent = String(uids.length);
- 
+
       chip.appendChild(emojiSpan);
       chip.appendChild(countSpan);
       chip.addEventListener("click", function () { toggleReaction(m.id, emoji); });
       bar.appendChild(chip);
     });
- 
+
     return bar;
   }
- 
+
   // 「🙂」ボタンを押したときに出す、5種類から選べるピッカー
   var openPickerEl = null;
   function togglePickerFor(messageId, anchorBtn) {
@@ -1743,7 +1743,7 @@
   }
   // ピッカー外をクリックしたら閉じる
   document.addEventListener("click", function () { closeOpenPicker(); });
- 
+
   function toggleReaction(messageId, emoji) {
     if (!state.currentRoomId || !state.myUid) return;
     var msg = state.currentMessages.find(function (mm) { return mm.id === messageId; });
@@ -1753,20 +1753,20 @@
     var nextUids = alreadyPressed
       ? current.filter(function (u) { return u !== state.myUid; })
       : current.concat([state.myUid]);
- 
+
     var nextReactions = {};
     REACTION_EMOJIS.forEach(function (e) {
       var list = (e === emoji) ? nextUids : ((msg.reactions && msg.reactions[e]) || []);
       if (list.length > 0) nextReactions[e] = list;
     });
- 
+
     var msgRef = fb.doc(fb.db, "rooms", state.currentRoomId, "messages", messageId);
     fb.updateDoc(msgRef, { reactions: nextReactions }).catch(function (err) {
       console.error(err);
       showError("スタンプの送信に失敗しました。");
     });
   }
- 
+
   function deleteMessage(messageId) {
     if (!state.currentRoomId) return;
     var msgRef = fb.doc(fb.db, "rooms", state.currentRoomId, "messages", messageId);
@@ -1779,11 +1779,11 @@
       }
     });
   }
- 
+
   function scrollToBottom() {
     requestAnimationFrame(function () { $messages.scrollTop = $messages.scrollHeight; });
   }
- 
+
   function updateSendButtonState() {
     var hasText = $input.value.trim().length > 0;
     $sendBtn.disabled = !hasText;
@@ -1798,13 +1798,13 @@
     var newHeight = Math.min($input.scrollHeight, 140);
     $input.style.height = newHeight + "px";
   }
- 
+
   /* =========================================================
      お題ガチャ
      ========================================================= */
   var lastGachaTopic = null;
   var topicBannerHideTimer = null;
- 
+
   function drawGachaTopic() {
     var topic = GACHA_TOPICS[Math.floor(Math.random() * GACHA_TOPICS.length)];
     // 同じお題が連続で出にくいよう、直前と同じなら1回だけ引き直す
@@ -1812,39 +1812,39 @@
       topic = GACHA_TOPICS[Math.floor(Math.random() * GACHA_TOPICS.length)];
     }
     lastGachaTopic = topic;
- 
+
     $topicBannerText.textContent = topic;
     $topicBanner.classList.remove("hidden");
- 
+
     window.clearTimeout(topicBannerHideTimer);
     topicBannerHideTimer = window.setTimeout(function () {
       $topicBanner.classList.add("hidden");
     }, 15000); // 15秒経ったら自動で隠す（消したくない場合は再度ガチャを押せば良い）
   }
- 
+
   $topicGachaBtn.addEventListener("click", drawGachaTopic);
   $topicBannerClose.addEventListener("click", hideTopicBanner);
- 
+
   function hideTopicBanner() {
     window.clearTimeout(topicBannerHideTimer);
     $topicBanner.classList.add("hidden");
   }
- 
+
   function handleSend() {
     if (!state.currentRoomId) return;
     var now = Date.now();
     if (now - lastSendTime < RATE_LIMIT_MS) return;
- 
+
     var text = sanitizeMessageText($input.value, MAX_LENGTH);
     if (text.length === 0) return;
- 
+
     lastSendTime = now;
     $input.value = "";
     updateCharCount();
     updateSendButtonState();
     autoResizeTextarea();
     $input.focus();
- 
+
     var messagesCol = fb.collection(fb.db, "rooms", state.currentRoomId, "messages");
     fb.addDoc(messagesCol, {
       uid: state.myUid,
@@ -1863,7 +1863,7 @@
       autoResizeTextarea();
     });
   }
- 
+
   /* =========================================================
      部屋からの退出・削除
      ========================================================= */
@@ -1874,7 +1874,7 @@
     state.currentRoomId = null;
     showScreen($screenRooms);
   });
- 
+
   $deleteRoomBtn.addEventListener("click", function () {
     var roomId = state.currentRoomId;
     var room = state.rooms.find(function (r) { return r.id === roomId; });
@@ -1886,7 +1886,7 @@
       function () { deleteRoomFromFirestore(roomId); }
     );
   });
- 
+
   /* =========================================================
      入力イベント（チャット入力欄）
      ========================================================= */
@@ -1902,7 +1902,7 @@
     }, 0);
   });
   $sendBtn.addEventListener("click", handleSend);
- 
+
   /* =========================================================
      テーマ切り替え・ネットワーク状態
      ========================================================= */
@@ -1910,19 +1910,19 @@
   var VALID_THEMES = ["light", "dark", "blue", "green", "pink", "orange"];
   var $themeMenu = document.getElementById("theme-menu");
   var themeMenuItems = Array.prototype.slice.call(document.querySelectorAll(".theme-menu-item"));
- 
+
   function applyTheme(theme) {
     if (VALID_THEMES.indexOf(theme) === -1) theme = "light";
     $appRoot.setAttribute("data-theme", theme);
     document.documentElement.setAttribute("data-theme", theme); // color-scheme切り替え用
     try { localStorage.setItem(THEME_STORAGE_KEY, theme); }
     catch (e) { /* プライベートモード等で失敗しても致命的ではないため無視 */ }
- 
+
     themeMenuItems.forEach(function (item) {
       item.classList.toggle("active", item.dataset.themeValue === theme);
     });
   }
- 
+
   function loadInitialTheme() {
     var saved = null;
     try { saved = localStorage.getItem(THEME_STORAGE_KEY); }
@@ -1936,17 +1936,17 @@
     }
   }
   loadInitialTheme();
- 
+
   // テーマメニューを、指定したボタンの近くに開く
   function openThemeMenu(anchorBtn) {
     var isOpenForThisBtn = !$themeMenu.classList.contains("hidden") && $themeMenu.dataset.anchorId === anchorBtn.id;
     if (isOpenForThisBtn) { closeThemeMenu(); return; }
- 
+
     var appRect = $appRoot.getBoundingClientRect();
     var btnRect = anchorBtn.getBoundingClientRect();
     var top = btnRect.bottom - appRect.top + 6;
     var right = appRect.right - btnRect.right;
- 
+
     $themeMenu.style.top = top + "px";
     $themeMenu.style.right = right + "px";
     $themeMenu.style.left = "auto";
@@ -1956,31 +1956,31 @@
   function closeThemeMenu() {
     $themeMenu.classList.add("hidden");
   }
- 
+
   $themeBtn.addEventListener("click", function (e) { e.stopPropagation(); openThemeMenu($themeBtn); });
   $themeBtnFloating.addEventListener("click", function (e) { e.stopPropagation(); openThemeMenu($themeBtnFloating); });
- 
+
   themeMenuItems.forEach(function (item) {
     item.addEventListener("click", function () {
       applyTheme(item.dataset.themeValue);
       closeThemeMenu();
     });
   });
- 
+
   // メニュー外をクリックしたら閉じる（スタンプピッカーと同様の挙動）
   document.addEventListener("click", function (e) {
     if (!$themeMenu.classList.contains("hidden") && !$themeMenu.contains(e.target)) {
       closeThemeMenu();
     }
   });
- 
+
   window.addEventListener("offline", function () {
     showError("ネットワーク接続がありません。再接続するまでお待ちください。", { persistent: true, showReload: true });
   });
   window.addEventListener("online", function () {
     hideError();
   });
- 
+
   /* =========================================================
      Firebase 初期化・匿名ログイン
      ========================================================= */
@@ -2004,7 +2004,7 @@
       showError("サーバーへの接続に失敗しました。", { persistent: true, showReload: true });
     });
   }
- 
+
   if (window.__firebase) {
     initFirebaseAuth();
   } else {
@@ -2012,6 +2012,6 @@
   }
 })();
 </script>
- 
+
 </body>
 </html>
