@@ -414,9 +414,14 @@
   .reaction-count{ color: var(--text-sub); font-size:11px; }
   .reaction-chip.active .reaction-count{ color: var(--accent); }
 
+<<<<<<< HEAD
   .meta-row{ display:flex; align-items:center; gap:5px; margin-top:3px; }
   .meta{ font-size:11px; color: var(--text-sub); }
   .read-status{ font-size:10.5px; color: var(--accent); }
+=======
+  .meta{ font-size:11px; color: var(--text-sub); margin-top:3px; }
+  .read-status{ font-size:10.5px; color: var(--accent); margin-top:1px; }
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
   .sender-name{ font-size:12px; color: var(--text-sub); margin: 0 0 2px 2px; }
 
   .composer{ flex-shrink:0; border-top: 1px solid var(--border); padding: 10px 12px; background: var(--panel); }
@@ -931,7 +936,11 @@
     rooms: [],            // Firestoreから取得した部屋一覧（リアルタイム同期）
     currentRoomId: null,
     currentMessages: [],  // 現在の部屋のメッセージ（リアルタイム同期）
+<<<<<<< HEAD
     othersReadReceipts: [], // 既読判定用: 自分以外の既読時刻 [{uid, lastReadAtMs}]
+=======
+    othersPresence: [],   // 既読判定用: 自分以外の在室情報 [{uid, lastSeenMs}]
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
     roomsUnsub: null,
     messagesUnsub: null
   };
@@ -1510,13 +1519,20 @@
     presenceUnsub = fb.onSnapshot(presenceCol, function (snapshot) {
       var now = Date.now();
       var onlineCount = 0;
+      var others = []; // 既読判定用: 自分以外の {uid, lastSeenMs}
       snapshot.forEach(function (docSnap) {
         var data = docSnap.data();
         var lastSeen = data.lastSeen ? data.lastSeen.toDate().getTime() : 0;
         if (now - lastSeen < PRESENCE_STALE_MS) onlineCount += 1;
+        if (docSnap.id !== state.myUid) {
+          others.push({ uid: docSnap.id, lastSeenMs: lastSeen });
+        }
       });
       if (onlineCount < 1) onlineCount = 1; // 自分が見えている以上は最低1人
       $roomMemberCount.textContent = "オンライン: " + onlineCount + "人";
+
+      state.othersPresence = others;
+      renderAllMessages(); // 既読表示を最新の在室状況で再計算する
     }, function (err) {
       console.error("presence subscribe failed", err);
     });
@@ -1659,11 +1675,20 @@
     if (!m.deleted) {
       wrap.appendChild(buildReactionBar(m));
     }
+<<<<<<< HEAD
     wrap.appendChild(metaRow);
+=======
+    wrap.appendChild(meta);
+    if (isMe && !m.deleted && m.createdAt) {
+      var readEl = buildReadStatus(m);
+      if (readEl) wrap.appendChild(readEl);
+    }
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
     row.appendChild(wrap);
     return row;
   }
 
+<<<<<<< HEAD
   // 既読表示: 自分が送ったメッセージについて、相手が「最後にこの部屋を
   // 開いた時刻（readReceipts）」がメッセージ送信時刻より新しければ既読とする
   function buildReadStatus(m) {
@@ -1675,6 +1700,19 @@
     if (readCount === 0) return null;
 
     var el = document.createElement("span");
+=======
+  // 既読表示: 自分が送ったメッセージについて、メッセージ送信後に
+  // 在室確認(presence)があった人数を「既読」としてカウントする
+  function buildReadStatus(m) {
+    var msgTimeMs = m.createdAt.getTime();
+    var readCount = 0;
+    (state.othersPresence || []).forEach(function (p) {
+      if (p.lastSeenMs > msgTimeMs) readCount += 1;
+    });
+    if (readCount === 0) return null;
+
+    var el = document.createElement("div");
+>>>>>>> 7d10792f00bb13991cf2e98fea9c2643d474804b
     el.className = "read-status";
     el.textContent = readCount === 1 ? "既読" : "既読 " + readCount + "人";
     return el;
